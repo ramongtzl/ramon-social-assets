@@ -1,0 +1,10 @@
+# assets/, state.json and post-log.csv MUST be committed:
+# assets/ is what GitHub Pages serves to Instagram,
+# state.json is what stops a post going out twice.
+__pycache__/
+*.pyc
+*.BACKUP-*
+*.env
+.env
+token*.json
+*secret*

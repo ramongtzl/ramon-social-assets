@@ -1,0 +1,46 @@
+# Weekly housekeeping for the posting agent.
+# Put this at .github/workflows/maintain.yml alongside post.yml.
+#
+# Prunes reels that have already gone out (they are ~5 MB each and the Pages
+# ceiling is 1 GB) and fails loudly when the reel window runs thin — that
+# failure is the signal to run the vault-side refresh, Routine 21.
+
+name: maintain-assets
+
+on:
+  schedule:
+    - cron: "20 15 * * 1"       # Mondays 15:20 UTC (~08:20 Pacific)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  maintain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Prune posted reels and check the window
+        id: check
+        continue-on-error: true      # a thin window should report, not break the repo
+        run: python maintain.py
+
+      - name: Commit the pruned bundle
+        if: always()
+        run: |
+          git config user.name  "posting-agent"
+          git config user.email "actions@github.com"
+          git add -A assets health.json 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "weekly prune $(date -u +%Y-%m-%d)"
+          git push || true
+
+      - name: Say plainly that the window needs topping up
+        if: steps.check.outcome == 'failure'
+        run: |
+          echo "::warning::Reel window is running low — run Routine 21 (social agent refresh) to render more reels and push a new window."
+          cat health.json

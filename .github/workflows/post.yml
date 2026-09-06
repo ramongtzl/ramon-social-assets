@@ -1,0 +1,62 @@
+# Instagram posting agent — runs hourly, posts whatever is due that Pacific hour.
+#
+# Put this at .github/workflows/post.yml in the assets repo.
+# Hourly (not one cron per slot) so the schedule does not drift an hour at
+# each DST boundary — GitHub cron is UTC, the schedule is Pacific.
+#
+# A public repo has unlimited Actions minutes, so 24 short runs a day is free.
+
+name: post-to-social
+
+on:
+  schedule:
+    - cron: "5 * * * *"        # :05 past every hour, UTC
+  workflow_dispatch:            # manual "Run workflow" button, for testing
+    inputs:
+      dry_run:
+        description: "Log what would post without calling the API"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write               # needed to commit state.json back
+
+concurrency:
+  group: ig-post                # never let two runs post at once
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Post what is due
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          IG_USER_GROWTH: ${{ secrets.IG_USER_GROWTH }}
+          IG_USER_HOUSES: ${{ secrets.IG_USER_HOUSES }}
+          ASSET_BASE_URL: ${{ secrets.ASSET_BASE_URL }}
+          # extra channels - each is optional, the agent skips what is unset
+          FB_PAGE_IDS: ${{ secrets.FB_PAGE_IDS }}
+          LI_ACCESS_TOKEN: ${{ secrets.LI_ACCESS_TOKEN }}
+          LI_PERSON_URN: ${{ secrets.LI_PERSON_URN }}
+          LI_ORG_ID: ${{ secrets.LI_ORG_ID }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+        run: python post_agent.py
+
+      - name: Record what was posted
+        if: always()
+        run: |
+          git config user.name  "posting-agent"
+          git config user.email "actions@github.com"
+          git add state.json post-log.csv 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "posted $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push || true
