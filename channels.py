@@ -90,8 +90,35 @@ def fb_pages(user_token):
     return _page_tokens
 
 
-def fb_targets(user_token):
-    ids = [x.strip() for x in os.environ.get("FB_PAGE_IDS", "").split(",") if x.strip()]
+def fb_page_ids(account=None):
+    """Page ids this row should go to.
+
+    FB_PAGE_IDS accepts two forms, mixed freely:
+
+        414239392030697                     every row goes to this Page
+        ramonhouses=414239392030697         only rows on that account do
+
+    The scoped form matters because the two accounts publish different things.
+    A flat list of both Pages mirrors the book quote cards onto Ramon-HOUSES
+    and the listings onto Growth & Wealth - the same cross-posting that the
+    --with-books mistake caused on Instagram.
+    """
+    out = []
+    for raw in os.environ.get("FB_PAGE_IDS", "").split(","):
+        raw = raw.strip()
+        if not raw:
+            continue
+        if "=" in raw:
+            label, pid = raw.split("=", 1)
+            if account is None or label.strip() == account:
+                out.append(pid.strip())
+        else:
+            out.append(raw)
+    return out
+
+
+def fb_targets(user_token, account=None):
+    ids = fb_page_ids(account)
     if not ids:
         return []
     pages = fb_pages(user_token)
@@ -253,7 +280,7 @@ def yt_title_from_caption(caption, ref=""):
 
 # =============================================================== DISPATCH
 def fan_out(channels, kind, urls, caption, ref, ig_token, already, dry=False,
-            captions=None):
+            captions=None, account=None):
     """Publish one schedule row to every non-Instagram channel it names.
 
     channels: iterable like {"fb", "li", "yt"} (ig is handled by the caller)
@@ -286,9 +313,9 @@ def fan_out(channels, kind, urls, caption, ref, ig_token, already, dry=False,
             print("     %s FAILED: %s" % (key, str(e)[:300]))
 
     if "fb" in channels:
-        ids = [x.strip() for x in os.environ.get("FB_PAGE_IDS", "").split(",") if x.strip()]
+        ids = fb_page_ids(account)
         if not ids:
-            print("     fb: FB_PAGE_IDS not set - skipped")
+            print("     fb: no Page for this account in FB_PAGE_IDS - skipped")
         elif dry:
             for pid in ids:
                 print("     DRY fb:%s" % pid)
@@ -296,7 +323,7 @@ def fan_out(channels, kind, urls, caption, ref, ig_token, already, dry=False,
             # resolving Page tokens is itself a network call - a bad IG_TOKEN
             # must fail this channel only, never the whole run
             try:
-                pages = fb_targets(ig_token) if ig_token else []
+                pages = fb_targets(ig_token, account) if ig_token else []
             except Exception as e:                        # noqa: BLE001
                 pages = []
                 for pid in ids:
@@ -304,7 +331,8 @@ def fan_out(channels, kind, urls, caption, ref, ig_token, already, dry=False,
                 print("     fb: page lookup FAILED: %s" % str(e)[:200])
             for pid, page in pages:
                 _run("fb:" + pid,
-                     lambda pid=pid, page=page: fb_publish(pid, page["token"], kind, urls, caption))
+                     lambda pid=pid, page=page: fb_publish(
+                         pid, page["token"], kind, urls, _cap("fb")))
 
     if "li" in channels:
         targets = li_targets()
@@ -314,7 +342,8 @@ def fan_out(channels, kind, urls, caption, ref, ig_token, already, dry=False,
             if kind == "reel":
                 print("     li:%s video not supported here - skipped" % key)
                 continue
-            _run("li:" + key, lambda urn=urn: li_publish(urn, kind, urls, caption, alt=ref))
+            _run("li:" + key,
+                 lambda urn=urn: li_publish(urn, kind, urls, _cap("li"), alt=ref))
 
     if "yt" in channels:
         if not yt_configured():
