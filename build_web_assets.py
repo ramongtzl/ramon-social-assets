@@ -18,6 +18,7 @@ Output:
 Run:  python build_web_assets.py [--days N]   (default: everything)
 """
 import io, os, re, csv, sys, glob, json, shutil, datetime
+import platform_captions
 from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -113,10 +114,14 @@ def with_disclosure(caption):
 def add(post_id, date, time_, account, series, ref, images, caption, media="image"):
     if account == "ramonhouses":
         caption = with_disclosure(caption)
+    # Facebook and LinkedIn get their own wording, derived from the Instagram
+    # caption - fewer hashtags, no emoji on LinkedIn, no "swipe" language there.
+    _v = platform_captions.variants(caption)
     rows.append({"post_id": post_id, "post_date": date.isoformat(), "time": time_,
                  "account": account, "series": series, "ref": ref, "media": media,
                  "channels": CHANNELS.get(media, "ig"),
-                 "images": "|".join(images), "caption": caption})
+                 "images": "|".join(images), "caption": caption,
+                 "caption_fb": _v["fb"], "caption_li": _v["li"]})
     counts[series] = counts.get(series, 0) + 1
 
 
@@ -309,7 +314,8 @@ rows.sort(key=lambda r: (r["post_date"], r["time"], r["series"]))
 f = io.open(os.path.join(HERE, "schedule.csv"), "w", encoding="utf-8-sig", newline="")
 w = csv.DictWriter(f, fieldnames=["post_id", "post_date", "time", "account",
                                   "series", "ref", "media", "channels",
-                                  "images", "caption"])
+                                  "images", "caption",
+                                  "caption_fb", "caption_li"])
 w.writeheader()
 w.writerows(rows)
 f.close()

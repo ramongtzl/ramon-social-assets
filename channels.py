@@ -252,7 +252,8 @@ def yt_title_from_caption(caption, ref=""):
 
 
 # =============================================================== DISPATCH
-def fan_out(channels, kind, urls, caption, ref, ig_token, already, dry=False):
+def fan_out(channels, kind, urls, caption, ref, ig_token, already, dry=False,
+            captions=None):
     """Publish one schedule row to every non-Instagram channel it names.
 
     channels: iterable like {"fb", "li", "yt"} (ig is handled by the caller)
@@ -262,6 +263,12 @@ def fan_out(channels, kind, urls, caption, ref, ig_token, already, dry=False):
               plus a list of (target_key, error) failures
     """
     done, fails = {}, []
+    # Facebook and LinkedIn take their own wording where the schedule supplies
+    # it; anything missing falls back to the Instagram caption.
+    caps = captions or {}
+
+    def _cap(ch):
+        return (caps.get(ch) or "").strip() or caption
 
     def _run(key, fn):
         if key in already:

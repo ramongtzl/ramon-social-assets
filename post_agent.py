@@ -268,7 +268,9 @@ def main():
 
         # ---- Facebook / LinkedIn / YouTube ----
         done, errs = extra.fan_out(chans - {"ig"}, kind, imgs, caption, r["ref"],
-                                   TOKEN, targets, dry=DRY)
+                                   TOKEN, targets, dry=DRY,
+                                   captions={"fb": r.get("caption_fb", ""),
+                                             "li": r.get("caption_li", "")})
         for key, res in done.items():
             res["at"] = now.isoformat()
             targets[key] = res
