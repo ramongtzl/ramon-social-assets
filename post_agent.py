@@ -171,7 +171,24 @@ def log_row(row):
 
 # --------------------------------------------------------------- main
 def due_rows(now):
-    """Rows scheduled for today whose hour matches, and not already posted."""
+    """Rows scheduled for today whose hour matches, and not already posted.
+
+    POST_IDS overrides the date and hour test with an explicit comma-separated
+    list of post_ids. It exists so a real publish can be exercised on demand
+    instead of waiting for a slot - the rest of the path is untouched, so what
+    it proves is the path that actually runs. State dedupe still applies, so a
+    row forced early does not post again at its scheduled hour.
+    """
+    forced = [x.strip() for x in os.environ.get("POST_IDS", "").split(",")
+              if x.strip()]
+    if forced:
+        by_id = {r["post_id"]: r for r in
+                 csv.DictReader(io.open(SCHED, encoding="utf-8-sig"))}
+        missing = [f for f in forced if f not in by_id]
+        if missing:
+            print("UNKNOWN post_id: %s" % ", ".join(missing))
+        return [by_id[f] for f in forced if f in by_id]
+
     today = now.date().isoformat()
     hour = now.hour
     out = []

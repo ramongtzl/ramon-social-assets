@@ -17,6 +17,10 @@ on:
         description: "Log what would post without calling the API"
         type: boolean
         default: true
+      post_ids:
+        description: "Force these post_ids now, ignoring date and hour (comma separated)"
+        type: string
+        default: ""
 
 permissions:
   contents: write               # needed to commit state.json back
@@ -50,6 +54,7 @@ jobs:
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
           DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+          POST_IDS: ${{ inputs.post_ids }}
         run: python post_agent.py
 
       - name: Record what was posted
