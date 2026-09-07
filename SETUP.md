@@ -122,6 +122,21 @@ python build_web_assets.py --days 60  # just the next 60 days, for a smaller rep
 
 Then commit and push. The agent picks up the new `schedule.csv` on its next run.
 
+## Checking the credentials without posting
+
+Actions -> **verify-token** -> Run workflow. It asks Graph to name both
+accounts and confirms the asset host answers, then exits non-zero if anything
+is wrong. It never publishes and never echoes the token.
+
+Run it whenever posts stop appearing, or after any token or secret change.
+The hourly dry run is **not** a substitute: when no slot is due it skips the
+API entirely, so a wrong token still comes back green.
+
+Last verified 2026-09-06 - token valid, expires **2026-11-06**, scopes
+`instagram_basic, instagram_content_publish, pages_show_list,
+pages_read_engagement, business_management`;
+@ramongtzl.growthwealth (388 posts) and @ramonhouses (594 posts) both resolve.
+
 ## The one maintenance job
 
 **The token expires about every 60 days.** When it does, posting stops silently â€”
