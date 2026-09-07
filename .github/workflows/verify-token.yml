@@ -1,0 +1,93 @@
+# One-shot credential check. Manual only - never scheduled, never posts.
+#
+# The hourly dry run proves the secrets are READABLE, but if no slot is due it
+# never calls Instagram, so a wrong token or a wrong account id still looks
+# like a pass. This asks Graph who each account is and how many posts it has.
+# It prints usernames and counts only - the token is never echoed, and a
+# failure prints Graph's own error message so the cause is unambiguous.
+
+name: verify-token
+
+on:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Ask Instagram who these accounts are
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          IG_USER_GROWTH: ${{ secrets.IG_USER_GROWTH }}
+          IG_USER_HOUSES: ${{ secrets.IG_USER_HOUSES }}
+          ASSET_BASE_URL: ${{ secrets.ASSET_BASE_URL }}
+        run: |
+          python - <<'PY'
+          import os, json, sys, urllib.request, urllib.error
+
+          tok = os.environ.get("IG_TOKEN", "")
+          base = os.environ.get("ASSET_BASE_URL", "").rstrip("/")
+          print("token present :", bool(tok), "| length", len(tok))
+          print("asset base    :", base or "(unset)")
+          print()
+
+          def get(url):
+              try:
+                  with urllib.request.urlopen(url, timeout=30) as r:
+                      return True, json.load(r)
+              except urllib.error.HTTPError as e:
+                  return False, e.read().decode("utf-8", "replace")
+              except Exception as e:
+                  return False, str(e)
+
+          bad = 0
+
+          # 1. token identity and expiry
+          ok, d = get("https://graph.facebook.com/v21.0/debug_token"
+                      "?input_token=%s&access_token=%s" % (tok, tok))
+          if ok:
+              dd = d.get("data", {})
+              print("token type    :", dd.get("type"))
+              print("token valid   :", dd.get("is_valid"))
+              print("expires_at    :", dd.get("expires_at"), "(0 = never)")
+              print("scopes        :", ",".join(dd.get("scopes", [])))
+              if not dd.get("is_valid"):
+                  bad += 1
+          else:
+              print("TOKEN DEBUG FAILED:", d); bad += 1
+          print()
+
+          # 2. each Instagram account answers to this token
+          for label, key in (("growthwealth", "IG_USER_GROWTH"),
+                             ("ramonhouses",  "IG_USER_HOUSES")):
+              uid = os.environ.get(key, "")
+              ok, d = get("https://graph.facebook.com/v21.0/%s"
+                          "?fields=username,name,media_count&access_token=%s"
+                          % (uid, tok))
+              if ok:
+                  print("%-12s -> @%s | %s | %s posts"
+                        % (label, d.get("username"), d.get("name"),
+                           d.get("media_count")))
+              else:
+                  print("%-12s -> FAILED: %s" % (label, d)); bad += 1
+          print()
+
+          # 3. the images must actually be fetchable over public HTTPS -
+          #    Graph downloads them itself, it cannot read anything local
+          if base:
+              probe = base + "/schedule.csv"
+              try:
+                  req = urllib.request.Request(probe, method="HEAD")
+                  with urllib.request.urlopen(req, timeout=30) as r:
+                      print("assets reachable:", r.status, probe)
+              except Exception as e:
+                  print("ASSETS UNREACHABLE:", e); bad += 1
+
+          print()
+          print("RESULT:", "FAIL" if bad else "PASS")
+          sys.exit(1 if bad else 0)
+          PY
