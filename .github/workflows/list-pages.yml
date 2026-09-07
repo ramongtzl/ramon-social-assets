@@ -1,0 +1,69 @@
+# Lists the Facebook Pages the current IG_TOKEN can reach, and says whether the
+# token carries the permission needed to post to them.
+#
+# Manual only. Page ids are not secrets - they appear in every public Page URL -
+# so printing them is safe. Page ACCESS TOKENS are secret and are never printed.
+
+name: list-pages
+
+on:
+  workflow_dispatch:
+
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: List reachable Pages
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          FB_PAGE_IDS: ${{ secrets.FB_PAGE_IDS }}
+        run: |
+          python - <<'PY'
+          import os, json, urllib.request, urllib.error, urllib.parse
+
+          tok = os.environ.get("IG_TOKEN", "")
+          G = "https://graph.facebook.com/v21.0"
+
+          def get(u):
+              try:
+                  with urllib.request.urlopen(u, timeout=30) as r:
+                      return True, json.load(r)
+              except urllib.error.HTTPError as e:
+                  return False, e.read().decode("utf-8", "replace")[:400]
+              except Exception as e:
+                  return False, str(e)
+
+          ok, d = get("%s/debug_token?input_token=%s&access_token=%s"
+                      % (G, tok, tok))
+          scopes = d.get("data", {}).get("scopes", []) if ok else []
+          need = "pages_manage_posts"
+          print("scopes on the token :", ",".join(scopes) or "(unreadable)")
+          print("%-20s: %s" % (need, "PRESENT" if need in scopes else
+                               "MISSING - Facebook posting will fail"))
+          print()
+
+          ok, d = get("%s/me/accounts?fields=id,name,instagram_business_account"
+                      "&access_token=%s" % (G, urllib.parse.quote(tok)))
+          if not ok:
+              print("FAILED to list pages:", d)
+              raise SystemExit(1)
+
+          pages = d.get("data", [])
+          if not pages:
+              print("No Pages returned. The token's user manages none, or the")
+              print("app was not granted access to them during login.")
+          for p in pages:
+              iga = (p.get("instagram_business_account") or {}).get("id", "")
+              print("  id %-20s %-34s %s"
+                    % (p["id"], p.get("name", ""),
+                       ("-> IG " + iga) if iga else ""))
+          print()
+          print("FB_PAGE_IDS currently:", os.environ.get("FB_PAGE_IDS") or "(unset)")
+          print()
+          print("Set FB_PAGE_IDS to the comma-separated ids above that you want")
+          print("posts mirrored to.")
+          PY
