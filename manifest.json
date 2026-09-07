@@ -1,18 +1,18 @@
 {
-  "built": "2026-09-06T13:17:19",
-  "posts": 897,
+  "built": "2026-09-06T17:18:23",
+  "posts": 941,
   "by_series": {
     "Round 2": 363,
     "Round 2b": 363,
     "Carousel EN": 52,
-    "Reel EN": 7,
+    "Reel EN": 51,
     "Carousel ES": 52,
     "RE Single EN": 30,
     "RE Single ES": 30
   },
-  "reel_window_weeks": 8,
-  "asset_files": 1625,
-  "asset_mb": 203.7,
+  "reel_window_weeks": 52,
+  "asset_files": 1669,
+  "asset_mb": 412.8,
   "first": "2026-09-01",
   "last": "2027-08-30"
 }
