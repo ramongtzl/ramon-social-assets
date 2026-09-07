@@ -65,6 +65,16 @@ USERS = {
     "ramonhouses": os.environ.get("IG_USER_HOUSES", ""),
 }
 BASE = os.environ.get("ASSET_BASE_URL", "").rstrip("/")
+
+# The schedule stores image paths relative to the assets/ directory
+# ("re-es/re-es-day-01.jpg"), but Pages serves the whole repo, so the public
+# URL needs the assets/ segment in it. If the secret points at the repo root
+# the images 404, GitHub answers with an HTML error page, and Graph reports
+# the useless "Only photo or video can be accepted as media type" - which is
+# how this was found on 2026-09-06. Appending it here means the secret works
+# whether or not it already carries the segment.
+if BASE and os.path.isdir(os.path.join(HERE, "assets"))         and not BASE.endswith("/assets"):
+    BASE += "/assets"
 DRY = os.environ.get("DRY_RUN", "") == "1"
 
 
