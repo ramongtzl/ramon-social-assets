@@ -309,6 +309,23 @@ for _lang, _day, _src, _cap, _sub in _queue:
         ["%s/%s" % (_sub, _name)], _cap)
     _d += datetime.timedelta(days=1)
 
+# Ad-hoc rows queued outside the content plan, e.g. a Bank of Canada rate
+# announcement card put in by Routine 24 on the morning it is announced.
+# This file regenerates schedule.csv from scratch, so without this merge any
+# hand-queued row would be silently dropped on the next rebuild.
+_extras = os.path.join(HERE, "extras.csv")
+if os.path.exists(_extras):
+    _have = {r["post_id"] for r in rows}
+    _added = 0
+    for _r in csv.DictReader(io.open(_extras, encoding="utf-8-sig")):
+        if _r["post_id"] in _have:
+            continue
+        rows.append(_r)
+        _have.add(_r["post_id"])
+        _added += 1
+    if _added:
+        print("merged %d row(s) from extras.csv" % _added)
+
 rows.sort(key=lambda r: (r["post_date"], r["time"], r["series"]))
 
 f = io.open(os.path.join(HERE, "schedule.csv"), "w", encoding="utf-8-sig", newline="")
