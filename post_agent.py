@@ -206,9 +206,21 @@ def due_rows(now):
         if r["post_date"] != today:
             continue
         try:
-            if int(r["time"].split(":")[0]) != hour:
-                continue
+            slot = int(r["time"].split(":")[0])
         except ValueError:
+            continue
+        # Any slot for TODAY that has come round, not just this exact hour.
+        #
+        # GitHub does not guarantee scheduled workflows: on 2026-09-07 the
+        # hourly cron actually fired at 04:31, 10:08, 16:23, 20:28 and 23:26
+        # UTC. Matching the exact hour meant every late run found nothing due,
+        # logged "nothing due this hour" and exited green - so all three of
+        # that day's posts were silently skipped while every run looked fine.
+        #
+        # Bounded to today on purpose. State dedupe stops anything already
+        # published from repeating, and confining the catch-up to the current
+        # day means a long outage never dumps a backlog into the feed.
+        if slot > hour:
             continue
         out.append(r)
     return out
