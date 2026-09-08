@@ -13,3 +13,4 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-09-07T17:24:30.147811-07:00,r2b-day-008,ig:growthwealth,Round 2b,Day 008,17973042036130919,ok,
 2026-09-07T17:24:30.147811-07:00,r2b-day-008,fb:543998318793132,Round 2b,Day 008,,error,"HTTP 403: {""error"":{""message"":""(#200) The permission(s) pages_manage_posts are not available. It could because either they are deprecated or need to be approved by App Review."",""type"":""OAuthException"",""code"":200,""fbtrace_id"":""ATQiiZ4TYRw5oOZAjNo0w4L""}}"
 2026-09-08T02:33:10.041518-07:00,r2-day-009,ig:growthwealth,Round 2,Day 009,18110266364105132,ok,
+2026-09-08T11:32:00.300867-07:00,car-en-w02a,ig:ramonhouses,Carousel EN,w02a,18086138186418746,ok,
