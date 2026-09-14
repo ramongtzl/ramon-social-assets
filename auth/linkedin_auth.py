@@ -19,7 +19,7 @@ browser, catches the redirect on localhost, exchanges the code, and prints
 the token. Member tokens last 60 days - put a reminder in the calendar and
 re-run this before it expires; the agent cannot refresh it on its own.
 """
-import json, urllib.parse, urllib.request, webbrowser, getpass, sys
+import json, urllib.parse, urllib.request, urllib.error, webbrowser, getpass, sys
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 REDIRECT = "http://localhost:8765/callback"
@@ -32,10 +32,29 @@ REDIRECT = "http://localhost:8765/callback"
 COMPANY = "--company" in sys.argv
 SCOPES = "openid profile w_member_social" + (" w_organization_social r_organization_social" if COMPANY else "")
 
-client_id = input("LinkedIn Client ID: ").strip()
-client_secret = getpass.getpass("LinkedIn Client Secret (hidden): ").strip()
-if not client_id or not client_secret:
-    sys.exit("both values are required")
+DEFAULT_CLIENT_ID = "86ytr1vfod54p2"   # Ramon Houses Social Agent - a client ID is not a secret
+
+
+def from_clipboard():
+    """Read the Windows clipboard, so a hidden paste can't go wrong."""
+    import subprocess
+    try:
+        out = subprocess.run(["powershell", "-NoProfile", "-Command", "Get-Clipboard"],
+                             capture_output=True, text=True, timeout=15).stdout
+        return out.strip()
+    except Exception:
+        return ""
+
+
+print("Copy the LinkedIn Client Secret first (the copy icon on the app's Auth tab).")
+client_id = input("LinkedIn Client ID [press Enter for %s]: " % DEFAULT_CLIENT_ID).strip() or DEFAULT_CLIENT_ID
+client_secret = from_clipboard()
+if not client_secret.startswith("WPL_"):
+    print("The clipboard does not hold a LinkedIn secret (they start with WPL_).")
+    client_secret = getpass.getpass("Paste the Client Secret instead (hidden): ").strip()
+if not client_secret.startswith("WPL_"):
+    sys.exit("That is not a LinkedIn client secret - copy it from the Auth tab and run again.")
+print("Secret read from the clipboard (%d characters, not shown)." % len(client_secret))
 
 url = ("https://www.linkedin.com/oauth/v2/authorization?" +
        urllib.parse.urlencode({"response_type": "code", "client_id": client_id,
@@ -66,11 +85,16 @@ srv.handle_request()
 if not code.get("v"):
     sys.exit("no code returned: %s" % code.get("err", "unknown"))
 
-tok = json.loads(urllib.request.urlopen(urllib.request.Request(
-    "https://www.linkedin.com/oauth/v2/accessToken",
-    data=urllib.parse.urlencode({"grant_type": "authorization_code", "code": code["v"],
-                                 "redirect_uri": REDIRECT, "client_id": client_id,
-                                 "client_secret": client_secret}).encode())).read())
+try:
+    tok = json.loads(urllib.request.urlopen(urllib.request.Request(
+        "https://www.linkedin.com/oauth/v2/accessToken",
+        data=urllib.parse.urlencode({"grant_type": "authorization_code", "code": code["v"],
+                                     "redirect_uri": REDIRECT, "client_id": client_id,
+                                     "client_secret": client_secret}).encode())).read())
+except urllib.error.HTTPError as e:
+    detail = e.read().decode("utf-8", "replace")
+    sys.exit("\nLinkedIn refused the login (HTTP %s): %s\n"
+             "Usually the secret: copy the CURRENT one from the Auth tab and run again." % (e.code, detail[:300]))
 access = tok["access_token"]
 days = int(tok.get("expires_in", 0)) // 86400
 
