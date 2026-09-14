@@ -76,6 +76,7 @@ BASE = os.environ.get("ASSET_BASE_URL", "").rstrip("/")
 if BASE and os.path.isdir(os.path.join(HERE, "assets"))         and not BASE.endswith("/assets"):
     BASE += "/assets"
 DRY = os.environ.get("DRY_RUN", "") == "1"
+LI_SERIES = set(s.strip() for s in (os.environ.get("LI_SERIES") or "Blog Series EN,Carousel EN").split(",") if s.strip())
 
 
 # --------------------------------------------------------------- http
@@ -255,6 +256,12 @@ def main():
             "carousel" if len(imgs) > 1 else "image")
         chans = set(c.strip().lower() for c in
                     (r.get("channels") or "ig").split(",") if c.strip())
+        # LinkedIn posts to Ramon's PERSONAL profile, so it only gets the series in
+        # LI_SERIES (a repo secret or variable, comma separated). Without this every
+        # book card, daily card and quote would land there - 4-5 posts a day on a
+        # professional network. Default: English blog series + English carousels.
+        if r.get("series", "") not in LI_SERIES:
+            chans.discard("li")
 
         # state per target. Older entries were {"at","media_id"} = IG only.
         entry = posted.setdefault(pid, {})
