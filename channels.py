@@ -26,7 +26,22 @@ import os, io, json, time, urllib.request, urllib.parse, urllib.error
 
 GRAPH = "https://graph.facebook.com/v21.0"
 LI_API = "https://api.linkedin.com"
-LI_VERSION = "202409"
+# LinkedIn retires each monthly API version after about a year, and a pinned
+# version ("202409") started failing with HTTP 426 NONEXISTENT_VERSION in
+# September 2026. Start two months back from today and step back a month at a
+# time if LinkedIn says a version is not active (see li_publish).
+import datetime as _dt
+
+
+def _months_back(n):
+    d = _dt.date.today().replace(day=1)
+    y, m = d.year, d.month - n
+    while m <= 0:
+        y, m = y - 1, m + 12
+    return "%04d%02d" % (y, m)
+
+
+LI_VERSION = os.environ.get("LI_VERSION") or _months_back(2)
 YT_UPLOAD = "https://www.googleapis.com/upload/youtube/v3/videos"
 
 
@@ -192,6 +207,20 @@ def li_upload_image(token, owner_urn, img_bytes):
 
 
 def li_publish(owner_urn, kind, urls, caption, alt=""):
+    """Publish, stepping LI_VERSION back a month while LinkedIn reports it inactive."""
+    global LI_VERSION
+    for step in range(12):
+        try:
+            return _li_publish_once(owner_urn, kind, urls, caption, alt)
+        except RuntimeError as e:
+            if "NONEXISTENT_VERSION" not in str(e):
+                raise
+            LI_VERSION = _months_back(2 + step + 1)
+            print("     li: API version not active, trying %s" % LI_VERSION)
+    raise RuntimeError("linkedin: no active API version found in the last 14 months")
+
+
+def _li_publish_once(owner_urn, kind, urls, caption, alt=""):
     """Image or multi-image post as the person or the organisation.
     Video is skipped here: LinkedIn's video upload is a separate multi-part
     flow and the reels go to YouTube instead."""
