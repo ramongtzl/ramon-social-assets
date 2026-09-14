@@ -51,10 +51,39 @@ print("Copy the LinkedIn Client Secret first (the copy icon on the app's Auth ta
 # "client id". Pass --client-id XXXX only if the app ever changes.
 client_id = (sys.argv[sys.argv.index("--client-id") + 1] if "--client-id" in sys.argv else DEFAULT_CLIENT_ID)
 print("LinkedIn app: %s" % client_id)
+def from_box():
+    """A small window with a masked field - Ctrl+V works there, unlike the console."""
+    try:
+        import tkinter as tk
+    except Exception:
+        return ""
+    got = {"v": ""}
+    root = tk.Tk()
+    root.title("LinkedIn Client Secret")
+    root.attributes("-topmost", True)
+    tk.Label(root, text="Paste the LinkedIn Client Secret (Ctrl+V), then click OK", padx=16, pady=10).pack()
+    e = tk.Entry(root, show="*", width=48)
+    e.pack(padx=16)
+    e.focus_force()
+    try:
+        clip = root.clipboard_get().strip()
+        if clip.startswith("WPL_"):
+            e.insert(0, clip)
+    except Exception:
+        pass
+    def ok(*_):
+        got["v"] = e.get().strip()
+        root.destroy()
+    e.bind("<Return>", ok)
+    tk.Button(root, text="OK", width=12, command=ok).pack(pady=12)
+    root.mainloop()
+    return got["v"]
+
+
 client_secret = from_clipboard()
 if not client_secret.startswith("WPL_"):
-    print("The clipboard does not hold a LinkedIn secret (they start with WPL_).")
-    client_secret = getpass.getpass("Paste the Client Secret instead (hidden): ").strip()
+    print("Opening a small window - paste the secret there with Ctrl+V and click OK.")
+    client_secret = from_box()
 if not client_secret.startswith("WPL_"):
     sys.exit("That is not a LinkedIn client secret - copy it from the Auth tab and run again.")
 print("Secret read from the clipboard (%d characters, not shown)." % len(client_secret))
