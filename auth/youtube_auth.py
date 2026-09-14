@@ -26,8 +26,28 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 REDIRECT = "http://localhost:8766/callback"
 SCOPE = "https://www.googleapis.com/auth/youtube.upload"
 
-client_id = input("YouTube OAuth Client ID: ").strip()
-client_secret = getpass.getpass("Client Secret (hidden): ").strip()
+def _existing_client():
+    """Reuse the Desktop OAuth client of GCP project gmail-multi-mcp-507618.
+
+    It already exists on this machine for the Gmail tools, its consent screen is
+    published (In production), and a Desktop client accepts any localhost port -
+    so nothing has to be created or copied. Values are never printed.
+    """
+    import os
+    p = os.path.join(os.environ.get("LOCALAPPDATA", ""), "gmail-multi-mcp", "client_secret.json")
+    if not os.path.exists(p):
+        return "", ""
+    d = json.load(open(p))
+    c = d.get("installed") or d.get("web") or {}
+    return c.get("client_id", ""), c.get("client_secret", "")
+
+
+client_id, client_secret = _existing_client()
+if client_id and client_secret:
+    print("Using the existing Google Cloud desktop client (gmail-multi-mcp).")
+else:
+    client_id = input("YouTube OAuth Client ID: ").strip()
+    client_secret = getpass.getpass("Client Secret (hidden): ").strip()
 if not client_id or not client_secret:
     sys.exit("both values are required")
 
@@ -53,7 +73,9 @@ class H(BaseHTTPRequestHandler):
 
 
 print("\nOpening the browser - sign in as the owner of @Ramonhouses.\n")
-webbrowser.open(url)
+webbrowser.open_new_tab(url)
+print("If no Google page opened, open this link (it holds no secret):\n\n  %s\n" % url)
+print("Waiting for you to approve on Google...")
 srv = HTTPServer(("localhost", 8766), H)
 srv.handle_request()
 if not code.get("v"):
