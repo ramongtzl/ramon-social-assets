@@ -111,7 +111,10 @@ class H(BaseHTTPRequestHandler):
 
 print("\nOpening the browser. If a scope is refused, remove it from SCOPES and re-run;")
 print("w_organization_social only works once Community Management API is approved.\n")
-webbrowser.open(url)
+webbrowser.open_new_tab(url)
+# The link carries only the public client id - no secret - so it is safe to show.
+print("If no LinkedIn page opened, Ctrl+click this link (or copy it into Chrome):\n\n  %s\n" % url)
+print("Waiting for you to click Allow on LinkedIn...")
 srv = HTTPServer(("localhost", 8765), H)
 srv.handle_request()
 if not code.get("v"):
