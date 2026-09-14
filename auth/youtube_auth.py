@@ -24,7 +24,9 @@ import json, urllib.parse, urllib.request, webbrowser, getpass, sys
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 REDIRECT = "http://localhost:8766/callback"
-SCOPE = "https://www.googleapis.com/auth/youtube.upload"
+# upload to post; readonly so the channel check (channels.list mine=true) is allowed -
+# with upload alone that check returns 403 and nothing gets saved.
+SCOPE = "https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube.readonly"
 
 def _existing_client():
     """Reuse the Desktop OAuth client of GCP project gmail-multi-mcp-507618.
