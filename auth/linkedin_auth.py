@@ -26,7 +26,11 @@ REDIRECT = "http://localhost:8765/callback"
 # w_member_social  -> post as the member
 # w_organization_social -> post as the company page (needs Community Management API)
 # openid profile   -> lets us read the person URN via /v2/userinfo
-SCOPES = "openid profile w_member_social w_organization_social r_organization_social"
+# Company-page scopes are refused until LinkedIn approves the Community Management
+# API for the app, and one refused scope fails the whole login. So the default
+# asks only for the personal profile; re-run with --company once approved.
+COMPANY = "--company" in sys.argv
+SCOPES = "openid profile w_member_social" + (" w_organization_social r_organization_social" if COMPANY else "")
 
 client_id = input("LinkedIn Client ID: ").strip()
 client_secret = getpass.getpass("LinkedIn Client Secret (hidden): ").strip()
@@ -75,9 +79,17 @@ me = json.loads(urllib.request.urlopen(urllib.request.Request(
     headers={"Authorization": "Bearer " + access})).read())
 person_urn = "urn:li:person:" + me["sub"]
 
-print("\n=== paste these into GitHub -> Settings -> Secrets -> Actions ===")
-print("LI_ACCESS_TOKEN = %s" % access)
-print("LI_PERSON_URN   = %s" % person_urn)
-print("LI_ORG_ID       = 143590036")
+# Save straight to GitHub - the token is never printed or pasted anywhere.
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from github_secret import set_secret
+print("\nSaving to GitHub secrets:")
+set_secret("LI_ACCESS_TOKEN", access)
+set_secret("LI_PERSON_URN", person_urn)
+if COMPANY:
+    set_secret("LI_ORG_ID", "143590036")
+else:
+    print("  (LI_ORG_ID not set - company-page posting waits for LinkedIn approval; re-run with --company)")
+print("\nPosting as: %s" % me.get("name", person_urn))
 print("\nToken expires in ~%d days. Re-run this script before then." % days)
 print("Scopes granted: %s" % tok.get("scope", "(not reported)"))

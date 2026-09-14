@@ -73,8 +73,14 @@ ch = json.loads(urllib.request.urlopen(urllib.request.Request(
     headers={"Authorization": "Bearer " + tok["access_token"]})).read())
 names = [c["snippet"]["title"] for c in ch.get("items", [])]
 
-print("\n=== paste these into GitHub -> Settings -> Secrets -> Actions ===")
-print("YT_CLIENT_ID     = %s" % client_id)
-print("YT_CLIENT_SECRET = (the secret you entered)")
-print("YT_REFRESH_TOKEN = %s" % tok["refresh_token"])
+# Save straight to GitHub - nothing secret is printed or pasted anywhere.
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from github_secret import set_secret
+if not names:
+    sys.exit("no YouTube channel on that Google account - nothing saved. Re-run and pick the @Ramonhouses account.")
+print("\nSaving to GitHub secrets:")
+set_secret("YT_CLIENT_ID", client_id)
+set_secret("YT_CLIENT_SECRET", client_secret)
+set_secret("YT_REFRESH_TOKEN", tok["refresh_token"])
 print("\nAuthorised channel(s): %s" % (", ".join(names) or "none found - wrong Google account?"))
