@@ -47,7 +47,10 @@ def from_clipboard():
 
 
 print("Copy the LinkedIn Client Secret first (the copy icon on the app's Auth tab).")
-client_id = input("LinkedIn Client ID [press Enter for %s]: " % DEFAULT_CLIENT_ID).strip() or DEFAULT_CLIENT_ID
+# No prompt: a pasted command once landed in this box and LinkedIn rejected the
+# "client id". Pass --client-id XXXX only if the app ever changes.
+client_id = (sys.argv[sys.argv.index("--client-id") + 1] if "--client-id" in sys.argv else DEFAULT_CLIENT_ID)
+print("LinkedIn app: %s" % client_id)
 client_secret = from_clipboard()
 if not client_secret.startswith("WPL_"):
     print("The clipboard does not hold a LinkedIn secret (they start with WPL_).")
