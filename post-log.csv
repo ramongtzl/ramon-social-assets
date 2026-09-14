@@ -38,3 +38,4 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-09-13T20:40:06.731840-07:00,re-en-day-03,fb:414239392030697,RE Single EN,Day 03,414239392030697_122227547564048227,ok,
 2026-09-13T20:40:06.731840-07:00,r2-day-014,fb:543998318793132,Round 2,Day 014,543998318793132_122179812362716289,ok,
 2026-09-13T21:26:10.218158-07:00,re-en-day-03,li:person,RE Single EN,Day 03,,error,"HTTP 426: {""status"":426,""code"":""NONEXISTENT_VERSION"",""message"":""Requested version 20240901 is not active""}"
+2026-09-13T21:28:31.858451-07:00,re-en-day-03,li:person,RE Single EN,Day 03,urn:li:share:7505120280806080512,ok,
