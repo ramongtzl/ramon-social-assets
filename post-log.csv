@@ -56,3 +56,9 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-09-15T11:06:25.863900-07:00,car-en-w03a,ig:ramonhouses,Carousel EN,w03a,,error,"HTTP 400: {""error"":{""message"":""Only photo or video can be accepted as media type."",""type"":""OAuthException"",""code"":9004,""error_subcode"":2207052,""is_transient"":false,""error_user_title"":""Media download has failed. The media URI doesn't meet our requirements."",""error_user_msg"":""The media could not be fe"
 2026-09-15T11:06:25.863900-07:00,car-en-w03a,fb:414239392030697,Carousel EN,w03a,414239392030697_122227746686048227,ok,
 2026-09-15T11:06:25.863900-07:00,car-en-w03a,li:person,Carousel EN,w03a,urn:li:ugcPost:7505688663595372544,ok,
+2026-09-15T14:06:21.560505-07:00,car-en-w03a,ig:ramonhouses,Carousel EN,w03a,18133625329646806,ok,
+2026-09-15T14:06:21.560505-07:00,r2b-day-016,ig:growthwealth,Round 2b,Day 016,18076370948709202,ok,
+2026-09-15T14:06:21.560505-07:00,r2b-day-016,fb:543998318793132,Round 2b,Day 016,543998318793132_122179966358716289,ok,
+2026-09-15T14:06:21.560505-07:00,bs-05-p1-en,ig:ramonhouses,Blog Series EN,Blog 05 Part 1,18114760375822458,ok,
+2026-09-15T14:06:21.560505-07:00,bs-05-p1-en,fb:414239392030697,Blog Series EN,Blog 05 Part 1,414239392030697_122227756766048227,ok,
+2026-09-15T14:06:21.560505-07:00,bs-05-p1-en,li:person,Blog Series EN,Blog 05 Part 1,urn:li:share:7505734147991138304,ok,
