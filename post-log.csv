@@ -103,3 +103,8 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-09-17T14:44:50.317709-07:00,oh-2026-09-20-th01-fraser-es,li:person,Open House,1-20723 Fraser Hwy R3139875,urn:li:share:7506468491697438720,ok,
 2026-09-17T14:47:03.324712-07:00,oh-2026-09-20-th01-fraser-en,ig:ramonhouses,Open House,1-20723 Fraser Hwy R3139875,,error,"HTTP 400: {""error"":{""message"":""Only photo or video can be accepted as media type."",""type"":""OAuthException"",""code"":9004,""error_subcode"":2207052,""is_transient"":false,""error_user_title"":""Media download has failed. The media URI doesn't meet our requirements."",""error_user_msg"":""The media could not be fe"
 2026-09-17T14:51:31.782897-07:00,oh-2026-09-20-th01-fraser-en,ig:ramonhouses,Open House,1-20723 Fraser Hwy R3139875,18063733601685284,ok,
+2026-09-17T16:30:16.171721-07:00,r2b-day-018,ig:growthwealth,Round 2b,Day 018,18000212225795755,ok,
+2026-09-17T16:30:16.171721-07:00,r2b-day-018,fb:543998318793132,Round 2b,Day 018,543998318793132_122180153546716289,ok,
+2026-09-17T16:30:16.171721-07:00,bs-05-p2-en,ig:ramonhouses,Blog Series EN,Blog 05 Part 2,18103875016967128,ok,
+2026-09-17T16:30:16.171721-07:00,bs-05-p2-en,fb:414239392030697,Blog Series EN,Blog 05 Part 2,414239392030697_122227929956048227,ok,
+2026-09-17T16:30:16.171721-07:00,bs-05-p2-en,li:person,Blog Series EN,Blog 05 Part 2,urn:li:share:7506494881897312256,ok,
