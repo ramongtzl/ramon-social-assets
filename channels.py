@@ -307,6 +307,26 @@ def yt_title_from_caption(caption, ref=""):
     return ("Ramon Houses %s" % ref).strip() + " #Shorts"
 
 
+def threads_publish(user_id, token, kind, urls, caption):
+    """Post to Threads.net using the Instagram Graph API. Returns thread id."""
+    if kind == "reel":
+        image_url = urls[0]
+    else:
+        image_url = urls[0] if urls else None
+
+    if not image_url:
+        raise RuntimeError("threads: no image URL provided")
+
+    payload = {
+        "image_url": image_url,
+        "caption": caption[:2200],
+        "access_token": token
+    }
+    r = _http(f"{GRAPH}/{user_id}/threads", json.dumps(payload),
+              {"Content-Type": "application/json"})
+    return r.get("id")
+
+
 # =============================================================== DISPATCH
 def fan_out(channels, kind, urls, caption, ref, ig_token, already, dry=False,
             captions=None, account=None):
@@ -373,6 +393,13 @@ def fan_out(channels, kind, urls, caption, ref, ig_token, already, dry=False,
                 continue
             _run("li:" + key,
                  lambda urn=urn: li_publish(urn, kind, urls, _cap("li"), alt=ref))
+
+    if "threads" in channels:
+        user_id = os.environ.get("IG_USER_HOUSES", "")
+        if not user_id or not ig_token:
+            print("     threads: IG_USER_HOUSES / IG_TOKEN not set - skipped")
+        else:
+            _run("threads", lambda: threads_publish(user_id, ig_token, kind, urls, _cap("threads")))
 
     if "yt" in channels:
         if not yt_configured():
