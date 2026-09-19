@@ -169,3 +169,4 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-09-18T22:43:45.715550-07:00,test-carousel-multi,threads,Test Carousel,tc1,,error,"HTTP 400: {""error"":{""message"":""Unsupported post request. Object with ID '17841405720640790' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api"",""type"":""GraphMet"
 2026-09-19T03:48:37.154220-07:00,r2-day-020,ig:growthwealth,Round 2,Day 020,17966433317966070,ok,
 2026-09-19T03:48:37.154220-07:00,r2-day-020,fb:543998318793132,Round 2,Day 020,543998318793132_122180328266716289,ok,
+2026-09-19T10:02:53.831130-07:00,test-threads-2026-09-19,threads,Test,test,18114400048803359,ok,
