@@ -272,7 +272,7 @@ def main():
         wanted = []
         if "ig" in chans:
             wanted.append("ig:" + acct)
-        if all(k in targets for k in wanted) and not ({"fb", "li", "yt"} & chans):
+        if all(k in targets for k in wanted) and not ({"fb", "li", "threads", "yt"} & chans):
             print("  skip %s (already posted %s)" % (pid, entry.get("at", "")))
             continue
 
