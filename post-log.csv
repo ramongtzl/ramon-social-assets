@@ -152,3 +152,6 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-09-18T21:54:15.250831-07:00,car-es-w03a,fb:414239392030697,Carousel ES,w03a,414239392030697_122228037044048227,ok,
 2026-09-18T21:57:04.822307-07:00,car-es-w03a,ig:ramonhouses,Carousel ES,w03a,18085329377300339,ok,
 2026-09-18T21:57:04.822307-07:00,car-es-w03a,fb:414239392030697,Carousel ES,w03a,414239392030697_122228037932048227,ok,
+2026-09-18T22:02:24.397899-07:00,car-es-w03a,ig:ramonhouses,Carousel ES,w03a,18284315569290957,ok,
+2026-09-18T22:02:24.397899-07:00,car-es-w03a,fb:414239392030697,Carousel ES,w03a,414239392030697_122228038916048227,ok,
+2026-09-18T22:02:24.397899-07:00,car-es-w03a,threads,Carousel ES,w03a,,error,"HTTP 400: {""error"":{""message"":""Unsupported post request. Object with ID '17841405720640790' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api"",""type"":""GraphMet"
