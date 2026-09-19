@@ -471,8 +471,13 @@ def fan_out(channels, kind, urls, caption, ref, ig_token, already, dry=False,
                  lambda urn=urn: li_publish(urn, kind, urls, _cap("li"), alt=ref))
 
     if "threads" in channels:
+        # One Threads token = one Threads profile (@ramonhouses). A growthwealth
+        # row must never land there, whatever its channels column says.
+        allowed = [a.strip() for a in os.environ.get("THREADS_ACCOUNTS", "ramonhouses").split(",")]
         if not threads_configured():
             print("     threads: THREADS_USER_ID / THREADS_TOKEN not set - skipped")
+        elif account and account not in allowed:
+            print("     threads: no Threads profile for %s - skipped" % account)
         else:
             _run("threads", lambda: threads_publish(
                 os.environ["THREADS_USER_ID"], os.environ["THREADS_TOKEN"],

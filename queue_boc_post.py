@@ -113,7 +113,7 @@ def main():
         touched.append(dest)
         rows.append(dict(
             post_id=pid, post_date=a.date, time=slot, account="ramonhouses",
-            series=series, ref="BoC %s" % a.date, media="image", channels="ig,fb,li",
+            series=series, ref="BoC %s" % a.date, media="image", channels="ig,fb,li,threads",
             images="boc/%s" % name, caption=read_caption(cap),
             caption_fb=read_caption(cap), caption_li=read_caption(cap)))
         print("queued %-22s %s %s  %s  (%d KB)" % (pid, a.date, slot, series, size // 1024))

@@ -86,7 +86,7 @@ counts = {}
 #   images and carousels -> Instagram + both Facebook Pages + LinkedIn (profile
 #   and company); reels -> Instagram + Facebook + YouTube Shorts. Book cards are
 #   not in this schedule at all (the Claude tasks post them).
-CHANNELS = {"image": "ig,fb,li", "carousel": "ig,fb,li", "reel": "ig,fb,yt"}
+CHANNELS = {"image": "ig,fb,li", "carousel": "ig,fb,li", "reel": "ig,fb,yt"}   # + threads for ramonhouses, see add()
 
 
 DISCLOSURE = u"Ramon Gutierrez PREC · eXp Realty · ramonhouses.com"
@@ -119,7 +119,9 @@ def add(post_id, date, time_, account, series, ref, images, caption, media="imag
     _v = platform_captions.variants(caption)
     rows.append({"post_id": post_id, "post_date": date.isoformat(), "time": time_,
                  "account": account, "series": series, "ref": ref, "media": media,
-                 "channels": CHANNELS.get(media, "ig"),
+                 # Threads only has a profile for @ramonhouses (token minted
+                 # 2026-09-19 via the Meta app's Threads use case)
+                 "channels": CHANNELS.get(media, "ig") + (",threads" if account == "ramonhouses" else ""),
                  "images": "|".join(images), "caption": caption,
                  "caption_fb": _v["fb"], "caption_li": _v["li"]})
     counts[series] = counts.get(series, 0) + 1

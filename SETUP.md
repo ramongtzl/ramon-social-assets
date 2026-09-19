@@ -220,3 +220,36 @@ verification once from the consent screen. Quota allows six uploads a day.
 Actions -> Run workflow -> dry run **on** logs every target it *would* hit.
 Then set `channels` to `fb` only on one row in `schedule.csv`, push, and run
 with dry run **off** to make a single real post before trusting the fan-out.
+
+### Threads - @ramonhouses (added 2026-09-19)
+
+Threads is **not** the Instagram Graph API. It has its own host
+(`graph.threads.net`), its own user id and its own token, so `IG_TOKEN` and the
+Instagram account id return "Unsupported post request" there - that was the
+2026-09-18 failure. Every `ramonhouses` row now carries `threads` in its
+channels column (images, carousels and reels); growthwealth has no Threads
+profile and is skipped by name in `channels.py` even if a row says otherwise.
+
+Set up once on the Meta app **Ramon Social Agent** (1433468848701369):
+
+1. Use cases -> **Access the Threads API** (Threads app id `1095800076313361`);
+   permissions `threads_basic` + `threads_content_publish` "Ready for testing".
+2. App roles -> Roles -> Add People -> **Threads Tester** -> `ramonhouses`, then
+   accept the invite as @ramonhouses at
+   threads.com/settings/website_permissions -> Invites.
+3. Use case Settings -> **User Token Generator** -> ramonhouses -> Generate ->
+   Copy. Then `python auth/threads_auth.py` reads the clipboard, resolves the
+   Threads user id and writes secrets **`THREADS_USER_ID`** + **`THREADS_TOKEN`**.
+   The token is never printed.
+
+First real post 2026-09-19 17:03 UTC: `test-threads-2026-09-19` -> Threads media
+`18114400048803359`.
+
+**The Threads token lasts ~60 days (expires about 2026-11-18)** and, like the
+others, cannot be refreshed from a write-only secret - repeat step 3 before
+then. Text is capped at 500 characters; `threads_text()` drops the hashtag
+block first, then trims at a word boundary. The OAuth route
+(`threads-callback.html` + `threads_auth.py --code`) exists as a fallback, but
+the dashboard's Redirect Callback URL field would not accept the URL through
+the browser automation on 2026-09-19, so it is unsaved - the generator route
+does not need it.
