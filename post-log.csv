@@ -161,3 +161,6 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-09-18T22:05:49.249483-07:00,test-reel-video,ig:ramonhouses,Test Reel,tr1,,error,container 18457077862190689 reported ERROR
 2026-09-18T22:05:49.249483-07:00,test-reel-video,fb:414239392030697,Test Reel,tr1,,error,"HTTP 400: {""error"":{""message"":""Unable to fetch video file from URL."",""type"":""OAuthException"",""code"":389,""error_subcode"":1363057,""is_transient"":false,""error_user_title"":""Unable to fetch video file from URL"",""error_user_msg"":""Unable to fetch video file from URL."",""fbtrace_id"":""AFT_DaVdlo9YmXf3NUGLBcG"""
 2026-09-18T22:05:49.249483-07:00,test-reel-video,yt,Test Reel,tr1,,error,HTTP Error 404: Not Found
+2026-09-18T22:12:18.435534-07:00,test-reel-video,ig:ramonhouses,Test Reel,tr1,18114824489068956,ok,
+2026-09-18T22:12:18.435534-07:00,test-reel-video,fb:414239392030697,Test Reel,tr1,3177387445794059,ok,
+2026-09-18T22:12:18.435534-07:00,test-reel-video,yt,Test Reel,tr1,IIgBZ6CuPdM,ok,
