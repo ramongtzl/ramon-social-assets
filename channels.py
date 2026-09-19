@@ -18,6 +18,10 @@ secrets) - never hardcode an id or a token here.
               LI_ORG_ID         "143590036"           (company page id)
     YouTube   YT_CLIENT_ID / YT_CLIENT_SECRET / YT_REFRESH_TOKEN
                                 from auth/youtube_auth.py
+    Threads   THREADS_USER_ID   Threads user id of @ramonhouses (not the IG id)
+              THREADS_TOKEN     long-lived Threads token from auth/threads_auth.py
+                                (its own API on graph.threads.net - IG_TOKEN
+                                does not work there)
 
 A target that has no configuration is skipped with a clear log line, never an
 exception, so one missing secret can never stop the other channels.
@@ -307,23 +311,95 @@ def yt_title_from_caption(caption, ref=""):
     return ("Ramon Houses %s" % ref).strip() + " #Shorts"
 
 
+# ------------------------------------------------------------- threads
+# Threads is NOT the Instagram Graph API. It has its own host, its own user id
+# and its own token, minted through the "Access the Threads API" use case on the
+# Meta app (auth/threads_auth.py). Posting through graph.facebook.com with the
+# Instagram id returns "Unsupported post request" - that is the 2026-09-18 error.
+THREADS = "https://graph.threads.net/v1.0"
+THREADS_TEXT_MAX = 500          # hard limit on a Threads post's text
+
+
+def threads_configured():
+    return bool(os.environ.get("THREADS_USER_ID") and os.environ.get("THREADS_TOKEN"))
+
+
+def threads_text(caption):
+    """Threads allows 500 characters. Keep whole lines where possible, and drop
+    the hashtag block first - Threads only links the first tag anyway."""
+    cap = caption.strip()
+    if len(cap) <= THREADS_TEXT_MAX:
+        return cap
+    lines = [l for l in cap.split("\n")]
+    kept = [l for l in lines if not (l.strip() and all(w.startswith("#") for w in l.split()))]
+    cap = "\n".join(kept).strip()
+    if len(cap) <= THREADS_TEXT_MAX:
+        return cap
+    cut = cap[:THREADS_TEXT_MAX - 1]
+    sp = cut.rfind(" ")
+    if sp > THREADS_TEXT_MAX - 80:
+        cut = cut[:sp]
+    return cut.rstrip() + "…"
+
+
+def _threads_wait(container_id, token, timeout=300):
+    """A container must reach FINISHED before threads_publish accepts it.
+    Images take a few seconds, videos a minute or more (Meta transcodes)."""
+    deadline = time.time() + timeout
+    while time.time() < deadline:
+        r = _http("%s/%s?fields=status,error_message&access_token=%s"
+                  % (THREADS, container_id, urllib.parse.quote(token)))
+        st = r.get("status")
+        if st == "FINISHED":
+            return True
+        if st in ("ERROR", "EXPIRED"):
+            raise RuntimeError("threads container %s %s: %s"
+                               % (container_id, st, r.get("error_message", "")))
+        time.sleep(5)
+    raise RuntimeError("threads container %s not ready within %ds" % (container_id, timeout))
+
+
 def threads_publish(user_id, token, kind, urls, caption):
-    """Post to Threads.net using the Instagram Graph API. Returns thread id."""
+    """Publish one schedule row to Threads. Returns the Threads media id.
+
+    image    -> IMAGE container
+    carousel -> one IMAGE item per slide (is_carousel_item) + CAROUSEL parent
+    reel     -> VIDEO container (the same MP4 the reel uses)
+    Two-step like Instagram: create container(s), wait FINISHED, threads_publish.
+    """
+    if not urls:
+        raise RuntimeError("threads: no media URL provided")
+    text = threads_text(caption)
+    base = "%s/%s" % (THREADS, user_id)
+
     if kind == "reel":
-        image_url = urls[0]
+        c = _http(base + "/threads", {"media_type": "VIDEO", "video_url": urls[0],
+                                       "text": text, "access_token": token})
+        _threads_wait(c["id"], token, timeout=600)
+        parent = c["id"]
+    elif kind == "carousel" or len(urls) > 1:
+        if not 2 <= len(urls) <= 20:
+            raise RuntimeError("threads carousel needs 2-20 images, got %d" % len(urls))
+        children = []
+        for u in urls:
+            c = _http(base + "/threads", {"media_type": "IMAGE", "image_url": u,
+                                           "is_carousel_item": "true",
+                                           "access_token": token})
+            children.append(c["id"])
+        for cid in children:
+            _threads_wait(cid, token)
+        p = _http(base + "/threads", {"media_type": "CAROUSEL",
+                                       "children": ",".join(children),
+                                       "text": text, "access_token": token})
+        _threads_wait(p["id"], token)
+        parent = p["id"]
     else:
-        image_url = urls[0] if urls else None
+        c = _http(base + "/threads", {"media_type": "IMAGE", "image_url": urls[0],
+                                       "text": text, "access_token": token})
+        _threads_wait(c["id"], token)
+        parent = c["id"]
 
-    if not image_url:
-        raise RuntimeError("threads: no image URL provided")
-
-    payload = {
-        "image_url": image_url,
-        "caption": caption[:2200],
-        "access_token": token
-    }
-    r = _http(f"{GRAPH}/{user_id}/threads", json.dumps(payload),
-              {"Content-Type": "application/json"})
+    r = _http(base + "/threads_publish", {"creation_id": parent, "access_token": token})
     return r.get("id")
 
 
@@ -395,11 +471,12 @@ def fan_out(channels, kind, urls, caption, ref, ig_token, already, dry=False,
                  lambda urn=urn: li_publish(urn, kind, urls, _cap("li"), alt=ref))
 
     if "threads" in channels:
-        user_id = os.environ.get("IG_USER_HOUSES", "")
-        if not user_id or not ig_token:
-            print("     threads: IG_USER_HOUSES / IG_TOKEN not set - skipped")
+        if not threads_configured():
+            print("     threads: THREADS_USER_ID / THREADS_TOKEN not set - skipped")
         else:
-            _run("threads", lambda: threads_publish(user_id, ig_token, kind, urls, _cap("threads")))
+            _run("threads", lambda: threads_publish(
+                os.environ["THREADS_USER_ID"], os.environ["THREADS_TOKEN"],
+                kind, urls, _cap("threads")))
 
     if "yt" in channels:
         if not yt_configured():

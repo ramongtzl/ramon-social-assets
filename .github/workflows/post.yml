@@ -51,6 +51,8 @@ jobs:
           LI_PERSON_URN: ${{ secrets.LI_PERSON_URN }}
           LI_ORG_ID: ${{ secrets.LI_ORG_ID }}
           LI_SERIES: ${{ vars.LI_SERIES }}      # optional repo variable; empty = Blog Series EN,Carousel EN
+          THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}

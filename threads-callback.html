@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Threads authorisation</title>
+<style>
+  body { font-family: system-ui, sans-serif; background: #0b1a33; color: #f5f1e6; margin: 0; padding: 48px 24px; }
+  main { max-width: 640px; margin: 0 auto; }
+  h1 { font-size: 20px; color: #d4af37; margin: 0 0 12px; }
+  code { display: block; word-break: break-all; background: #122a52; padding: 12px; border-radius: 6px; margin: 12px 0; }
+  p { line-height: 1.5; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Ramon Social Agent &middot; Threads</h1>
+  <p id="msg">This page only receives the OAuth redirect from Threads. Nothing is stored here.</p>
+  <code id="code"></code>
+</main>
+<script>
+  var q = new URLSearchParams(location.search);
+  var c = q.get("code"), e = q.get("error_description") || q.get("error");
+  if (c) { document.getElementById("msg").textContent = "Authorised. The code below is single-use and expires in minutes - auth/threads_auth.py reads it from this URL."; document.getElementById("code").textContent = c; }
+  else if (e) { document.getElementById("msg").textContent = "Threads refused: " + e; }
+</script>
+</body>
+</html>
