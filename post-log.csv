@@ -170,3 +170,10 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-09-19T03:48:37.154220-07:00,r2-day-020,ig:growthwealth,Round 2,Day 020,17966433317966070,ok,
 2026-09-19T03:48:37.154220-07:00,r2-day-020,fb:543998318793132,Round 2,Day 020,543998318793132_122180328266716289,ok,
 2026-09-19T10:02:53.831130-07:00,test-threads-2026-09-19,threads,Test,test,18114400048803359,ok,
+2026-09-19T10:56:23.069689-07:00,r2-day-020,fb:543998318793132,Round 2,Day 020,,error,"page lookup failed: HTTP 400: {""error"":{""message"":""Error validating access token: Session has expired on Saturday, 19-Sep-26 10:00:00 PDT. The current time is Saturday, 19-Sep-26 10:56:23 PDT."",""type"":""OAuthException"",""c"
+2026-09-19T10:56:23.069689-07:00,re-en-day-05,ig:ramonhouses,RE Single EN,Day 05,,error,"HTTP 400: {""error"":{""message"":""Error validating access token: Session has expired on Saturday, 19-Sep-26 10:00:00 PDT. The current time is Saturday, 19-Sep-26 10:56:23 PDT."",""type"":""OAuthException"",""code"":190,""error_subcode"":463,""fbtrace_id"":""AS7JvBa7V6QD878ZjPKtRxi""}}"
+2026-09-19T10:56:23.069689-07:00,re-en-day-05,li:person,RE Single EN,Day 05,urn:li:share:7507135523908403200,ok,
+2026-09-19T10:56:23.069689-07:00,re-en-day-05,threads,RE Single EN,Day 05,18353085895174304,ok,
+2026-09-19T10:56:23.069689-07:00,bs-05-p3-es,ig:ramonhouses,Blog Series ES,Blog 05 Part 3,,error,"HTTP 400: {""error"":{""message"":""Error validating access token: Session has expired on Saturday, 19-Sep-26 10:00:00 PDT. The current time is Saturday, 19-Sep-26 10:56:40 PDT."",""type"":""OAuthException"",""code"":190,""error_subcode"":463,""fbtrace_id"":""ASqfrI9_gfL7A_IvO5qEU3s""}}"
+2026-09-19T10:56:23.069689-07:00,bs-05-p3-es,li:person,Blog Series ES,Blog 05 Part 3,urn:li:share:7507135595077353473,ok,
+2026-09-19T10:56:23.069689-07:00,bs-05-p3-es,threads,Blog Series ES,Blog 05 Part 3,18111853295153891,ok,
