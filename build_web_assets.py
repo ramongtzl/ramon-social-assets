@@ -215,10 +215,9 @@ for lang, root in (("en", "ramonhouses-realestate-carousels"),
         if slot.endswith("a") and os.path.exists(reel):
             # EN reel Friday 11:00, ES reel Saturday 11:00 - a few days after the
             # carousel, so the same idea lands twice in two formats rather than
-            # twice on one day.
-            if lang != "en":
-                continue            # one reel a week now, EN only (Friday)
-            rdate = tue + datetime.timedelta(days=3)
+            # twice on one day. ES reels switched on 2026-09-19 (Ramon: grow
+            # YouTube Shorts) - two Shorts a week, one per language.
+            rdate = tue + datetime.timedelta(days=3 if lang == "en" else 4)
             if TODAY <= rdate <= TODAY + datetime.timedelta(weeks=REEL_WEEKS):
                 os.makedirs(os.path.join(ASSETS, "reels"), exist_ok=True)
                 rname = "%s%s.mp4" % (slot, suffix)
