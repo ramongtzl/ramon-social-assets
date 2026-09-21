@@ -132,15 +132,38 @@ Run it whenever posts stop appearing, or after any token or secret change.
 The hourly dry run is **not** a substitute: when no slot is due it skips the
 API entirely, so a wrong token still comes back green.
 
-Last verified 2026-09-06 - token valid, expires **2026-11-06**, scopes
-`instagram_basic, instagram_content_publish, pages_show_list,
-pages_read_engagement, business_management`;
-@ramongtzl.growthwealth (388 posts) and @ramonhouses (594 posts) both resolve.
+Last verified 2026-09-21 - token valid, **no expiry** (extended user token),
+scopes `instagram_basic, instagram_content_publish, instagram_manage_comments,
+pages_show_list, pages_read_engagement, pages_manage_posts, business_management`;
+both Pages and both Instagram accounts resolve; a real run posted to IG, FB,
+LinkedIn and Threads the same minute.
+
+**2026-09-19 outage, and how a refresh actually works.** During the Threads
+work a token straight out of Graph API Explorer was saved as `IG_TOKEN`. Those
+are *short-lived* (about an hour): posting died at 10:00 PDT on Sep 19 and 9
+posts were lost over the weekend with `Session has expired` on every IG/FB row.
+The refresh that works, end to end:
+
+1. Graph API Explorer (app 1433468848701369, User Token, the 7 permissions
+   above) -> **Generate Access Token**.
+2. Access Token Debugger -> paste -> Debug -> **Extend Access Token** (Meta
+   asks for the Facebook password here - that is Ramon's step). The result
+   says "will never expire".
+3. Copy the extended token, then `python auth/ig_token.py` - it reads the
+   clipboard, refuses anything expiring inside 30 days, checks both Pages are
+   visible and saves the secret. `auth/token_drop.py` (the localhost receiver)
+   does NOT work from a developers.facebook.com page - Chrome blocks an HTTPS
+   page from calling http://127.0.0.1 - so the clipboard path is the one to use.
+4. `python auth/dispatch.py verify-token.yml`, then
+   `python auth/dispatch.py post.yml dry_run=false`; `python auth/runs.py`
+   shows the results. Neither needs the gh CLI (not installed here).
 
 ## The one maintenance job
 
-**The token expires about every 60 days.** When it does, posting stops silently â€”
-the run fails, but Instagram never tells you. Two options:
+**A properly extended token has no expiry (since 2026-09-21), but LinkedIn and
+Threads tokens still last ~60 days**, and a token saved in a hurry can be a
+short-lived one. When one dies, posting stops silently - the run fails, but
+Instagram never tells you. Two options:
 
 - Put a calendar reminder to refresh it and update the secret, or
 - Ask me to add a monthly workflow that refreshes the token automatically and
