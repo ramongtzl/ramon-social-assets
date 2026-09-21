@@ -226,3 +226,9 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-09-20T23:10:07.866660-07:00,r2b-day-021,ig:growthwealth,Round 2b,Day 021,,error,"HTTP 400: {""error"":{""message"":""Error validating access token: Session has expired on Saturday, 19-Sep-26 10:00:00 PDT. The current time is Sunday, 20-Sep-26 23:10:08 PDT."",""type"":""OAuthException"",""code"":190,""error_subcode"":463,""fbtrace_id"":""AIpKf0GNDxZP4UnapgvmxNn""}}"
 2026-09-21T06:55:58.853659-07:00,r2-day-022,ig:growthwealth,Round 2,Day 022,,error,"HTTP 400: {""error"":{""message"":""Error validating access token: Session has expired on Saturday, 19-Sep-26 10:00:00 PDT. The current time is Monday, 21-Sep-26 06:55:59 PDT."",""type"":""OAuthException"",""code"":190,""error_subcode"":463,""fbtrace_id"":""ADKjXAG7Sqn1MHveGGc_S1D""}}"
 2026-09-21T06:55:58.853659-07:00,r2-day-022,fb:543998318793132,Round 2,Day 022,,error,"page lookup failed: HTTP 400: {""error"":{""message"":""Error validating access token: Session has expired on Saturday, 19-Sep-26 10:00:00 PDT. The current time is Monday, 21-Sep-26 06:55:59 PDT."",""type"":""OAuthException"",""cod"
+2026-09-21T10:36:37.867328-07:00,r2-day-022,ig:growthwealth,Round 2,Day 022,18100689887345791,ok,
+2026-09-21T10:36:37.867328-07:00,r2-day-022,fb:543998318793132,Round 2,Day 022,543998318793132_122180582714716289,ok,
+2026-09-21T10:36:37.867328-07:00,re-en-day-06,ig:ramonhouses,RE Single EN,Day 06,18105816872608459,ok,
+2026-09-21T10:36:37.867328-07:00,re-en-day-06,fb:414239392030697,RE Single EN,Day 06,414239392030697_122228317982048227,ok,
+2026-09-21T10:36:37.867328-07:00,re-en-day-06,li:person,RE Single EN,Day 06,urn:li:share:7507855458473398272,ok,
+2026-09-21T10:36:37.867328-07:00,re-en-day-06,threads,RE Single EN,Day 06,18011120417974209,ok,
