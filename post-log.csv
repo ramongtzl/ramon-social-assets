@@ -257,3 +257,11 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-09-21T16:11:50.975884-07:00,r2b-day-022,fb:543998318793132,Round 2b,Day 022,543998318793132_122180616380716289,ok,
 2026-09-22T02:51:12.603046-07:00,r2-day-023,ig:growthwealth,Round 2,Day 023,17985467484120166,ok,
 2026-09-22T02:51:12.603046-07:00,r2-day-023,fb:543998318793132,Round 2,Day 023,543998318793132_122180665910716289,ok,
+2026-09-22T11:45:45.432664-07:00,bs-01-p1-es,ig:ramonhouses,Blog Series ES,Blog 01 Part 1,18419883142146186,ok,
+2026-09-22T11:45:45.432664-07:00,bs-01-p1-es,fb:414239392030697,Blog Series ES,Blog 01 Part 1,414239392030697_122228465900048227,ok,
+2026-09-22T11:45:45.432664-07:00,bs-01-p1-es,li:person,Blog Series ES,Blog 01 Part 1,urn:li:share:7508235185449197568,ok,
+2026-09-22T11:45:45.432664-07:00,bs-01-p1-es,threads,Blog Series ES,Blog 01 Part 1,17973509655141369,ok,
+2026-09-22T11:45:45.432664-07:00,car-en-w04a,ig:ramonhouses,Carousel EN,w04a,,error,"HTTP 400: {""error"":{""message"":""Media ID is not available"",""type"":""OAuthException"",""code"":9007,""error_subcode"":2207027,""is_transient"":false,""error_user_title"":""Cannot Publish"",""error_user_msg"":""The media is not ready for publishing, please wait for a moment"",""fbtrace_id"":""ANzwzQ8llzlN1z49L9uS1JL""}}"
+2026-09-22T11:45:45.432664-07:00,car-en-w04a,fb:414239392030697,Carousel EN,w04a,414239392030697_122228466734048227,ok,
+2026-09-22T11:45:45.432664-07:00,car-en-w04a,li:person,Carousel EN,w04a,urn:li:ugcPost:7508235543496024064,ok,
+2026-09-22T11:45:45.432664-07:00,car-en-w04a,threads,Carousel EN,w04a,,error,"HTTP 400: {""error"":{""message"":""The requested resource does not exist"",""type"":""OAuthException"",""code"":24,""error_subcode"":4279009,""is_transient"":false,""error_user_title"":""Media Not Found"",""error_user_msg"":""The media with id 17923612353424903 cannot be found."",""fbtrace_id"":""AGuNfTFzr8dB_UQvMS-ef35""}}"
