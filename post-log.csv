@@ -320,3 +320,25 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-09-25T15:13:18.714384-07:00,rq-07-es,threads,RE Quote ES,Card 07,18106580408351031,ok,
 2026-09-25T15:13:18.714384-07:00,r2b-day-026,ig:growthwealth,Round 2b,Day 026,17885339916653337,ok,
 2026-09-25T15:13:18.714384-07:00,r2b-day-026,fb:543998318793132,Round 2b,Day 026,543998318793132_122181118382716289,ok,
+2026-09-25T19:40:22.824691-07:00,sold-2026-09-26-montvue-512-en,ig:ramonhouses,Just Sold,512-33820 South Fraser Way R3126384,17885547711652077,ok,
+2026-09-25T19:40:22.824691-07:00,sold-2026-09-26-montvue-512-en,fb:414239392030697,Just Sold,512-33820 South Fraser Way R3126384,414239392030697_122228815838048227,ok,
+2026-09-25T19:40:22.824691-07:00,sold-2026-09-26-montvue-512-en,li:person,Just Sold,512-33820 South Fraser Way R3126384,urn:li:share:7509441789834047488,ok,
+2026-09-25T19:40:22.824691-07:00,sold-2026-09-26-montvue-512-en,threads,Just Sold,512-33820 South Fraser Way R3126384,18369866347245327,ok,
+2026-09-25T19:40:22.824691-07:00,sold-2026-09-26-montvue-512-es,ig:ramonhouses,Just Sold,512-33820 South Fraser Way R3126384,18135238330652108,ok,
+2026-09-25T19:40:22.824691-07:00,sold-2026-09-26-montvue-512-es,fb:414239392030697,Just Sold,512-33820 South Fraser Way R3126384,414239392030697_122228815982048227,ok,
+2026-09-25T19:40:22.824691-07:00,sold-2026-09-26-montvue-512-es,li:person,Just Sold,512-33820 South Fraser Way R3126384,urn:li:share:7509441921229045760,ok,
+2026-09-25T19:40:22.824691-07:00,sold-2026-09-26-montvue-512-es,threads,Just Sold,512-33820 South Fraser Way R3126384,18138156208626137,ok,
+2026-09-25T19:40:22.824691-07:00,sold-2026-09-26-montvue-512-reel-en,ig:ramonhouses,Just Sold,512-33820 South Fraser Way R3126384,18048117464833353,ok,
+2026-09-25T19:40:22.824691-07:00,sold-2026-09-26-montvue-512-reel-en,fb:414239392030697,Just Sold,512-33820 South Fraser Way R3126384,1361386132431201,ok,
+2026-09-25T19:40:22.824691-07:00,sold-2026-09-26-montvue-512-reel-en,threads,Just Sold,512-33820 South Fraser Way R3126384,18018553352927172,ok,
+2026-09-25T19:40:22.824691-07:00,sold-2026-09-26-montvue-512-reel-en,yt,Just Sold,512-33820 South Fraser Way R3126384,,error,"HTTP 400: {
+  ""error"": ""invalid_grant"",
+  ""error_description"": ""Token has been expired or revoked.""
+}"
+2026-09-25T19:40:22.824691-07:00,sold-2026-09-26-montvue-512-reel-es,ig:ramonhouses,Just Sold,512-33820 South Fraser Way R3126384,18109133156128525,ok,
+2026-09-25T19:40:22.824691-07:00,sold-2026-09-26-montvue-512-reel-es,fb:414239392030697,Just Sold,512-33820 South Fraser Way R3126384,968964092913189,ok,
+2026-09-25T19:40:22.824691-07:00,sold-2026-09-26-montvue-512-reel-es,threads,Just Sold,512-33820 South Fraser Way R3126384,18176300320431565,ok,
+2026-09-25T19:40:22.824691-07:00,sold-2026-09-26-montvue-512-reel-es,yt,Just Sold,512-33820 South Fraser Way R3126384,,error,"HTTP 400: {
+  ""error"": ""invalid_grant"",
+  ""error_description"": ""Token has been expired or revoked.""
+}"
