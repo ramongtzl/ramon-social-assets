@@ -231,8 +231,21 @@ line + `#Shorts`; description = the caption; hashtags become tags.
 1. Google Cloud: enable **YouTube Data API v3**; OAuth consent screen External
    and **In production** (in Testing the refresh token dies in 7 days - the
    same trap as the gmail-multi setup); Desktop OAuth client.
-2. `python auth/youtube_auth.py` - sign in as the channel owner.
+2. `python auth/youtube_auth.py` - sign in as the channel owner
+   (ramongtzl.houses@gmail.com, channel "Ramon Gutierrez"). It saves the
+   secrets itself; nothing is printed or pasted.
 3. Secrets **`YT_CLIENT_ID`**, **`YT_CLIENT_SECRET`**, **`YT_REFRESH_TOKEN`**.
+
+**Which OAuth client (learned 2026-09-25).** The script now prefers
+`~/.gmail-mcp/credentials.json` - GCP project **ramon-gmail-mcp**, consent
+screen *In production*, so the refresh token never expires. The first YouTube
+token had been minted through the `gmail-multi-mcp` client, whose consent
+screen is still in *Testing*: that token died after 7 days and every reel
+failed on YouTube with `invalid_grant: Token has been expired or revoked`
+(IG/FB/Threads unaffected). YouTube Data API v3 also had to be **enabled on
+ramon-gmail-mcp** (it had only ever run Gmail) - until it was, the channel
+check returned 403; the script now reports that plainly and keeps the token.
+Re-authorised 2026-09-25 20:30; Montvue 512 reels re-sent and accepted.
 
 **Until Google verifies the app, API uploads are locked to PRIVATE.** They
 still land in YouTube Studio and can be flipped public by hand, or request
