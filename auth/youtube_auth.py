@@ -20,7 +20,22 @@ YouTube. Everything else works; they just need to be flipped to public in
 YouTube Studio, or the app verified once. Quota: 10,000 units/day, an upload
 costs 1,600 - six uploads a day at most, which is far more than the schedule.
 """
-import json, urllib.parse, urllib.request, webbrowser, getpass, sys
+# Norton Web Shield rewrites TLS with its own root; trust the Windows store (2026-09-04).
+try:
+    import truststore
+    truststore.inject_into_ssl()
+except ImportError:
+    pass
+# Google hosts resolve to dead IPv6 addresses on this network - IPv4 only.
+import socket as _socket
+_real_getaddrinfo = _socket.getaddrinfo
+def _ipv4_only_getaddrinfo(*a, **k):
+    res = _real_getaddrinfo(*a, **k)
+    v4 = [r for r in res if r[0] == _socket.AF_INET]
+    return v4 or res
+_socket.getaddrinfo = _ipv4_only_getaddrinfo
+
+import json, urllib.parse, urllib.request, urllib.error, webbrowser, getpass, sys
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 REDIRECT = "http://localhost:8766/callback"
@@ -29,16 +44,23 @@ REDIRECT = "http://localhost:8766/callback"
 SCOPE = "https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube.readonly"
 
 def _existing_client():
-    """Reuse the Desktop OAuth client of GCP project gmail-multi-mcp-507618.
-
-    It already exists on this machine for the Gmail tools, its consent screen is
-    published (In production), and a Desktop client accepts any localhost port -
-    so nothing has to be created or copied. Values are never printed.
+    """Reuse the Desktop OAuth client of GCP project ramon-gmail-mcp
+    (~/.gmail-mcp/credentials.json). Its consent screen IS In production, so the
+    refresh token never expires. The gmail-multi-mcp client is only a fallback:
+    its consent screen is still in Testing and its tokens die after 7 days -
+    the 2026-09-25 "Token has been expired or revoked" YouTube failure came
+    from a token minted through it. Values are never printed.
     """
     import os
-    p = os.path.join(os.environ.get("LOCALAPPDATA", ""), "gmail-multi-mcp", "client_secret.json")
-    if not os.path.exists(p):
+    home = os.environ.get("USERPROFILE", "")
+    for p in (os.path.join(home, ".gmail-mcp", "credentials.json"),
+              os.path.join(os.environ.get("GMAIL_MCP_HOME") or os.path.join(home, ".gmail-multi-mcp"), "client_secret.json"),
+              os.path.join(os.environ.get("LOCALAPPDATA", ""), "gmail-multi-mcp", "client_secret.json")):
+        if os.path.exists(p):
+            break
+    else:
         return "", ""
+    print("OAuth client: %s" % p)
     d = json.load(open(p))
     c = d.get("installed") or d.get("web") or {}
     return c.get("client_id", ""), c.get("client_secret", "")
@@ -46,7 +68,7 @@ def _existing_client():
 
 client_id, client_secret = _existing_client()
 if client_id and client_secret:
-    print("Using the existing Google Cloud desktop client (gmail-multi-mcp).")
+    print("Using the existing Google Cloud desktop client (see path above - it must be the In-production one).")
 else:
     client_id = input("YouTube OAuth Client ID: ").strip()
     client_secret = getpass.getpass("Client Secret (hidden): ").strip()
@@ -92,17 +114,31 @@ if "refresh_token" not in tok:
     sys.exit("no refresh_token returned - revoke the app at myaccount.google.com/permissions and re-run")
 
 # sanity check: which channel did we get?
-ch = json.loads(urllib.request.urlopen(urllib.request.Request(
-    "https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true",
-    headers={"Authorization": "Bearer " + tok["access_token"]})).read())
+api_disabled = False
+try:
+    ch = json.loads(urllib.request.urlopen(urllib.request.Request(
+        "https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true",
+        headers={"Authorization": "Bearer " + tok["access_token"]})).read())
+except urllib.error.HTTPError as e:
+    body = e.read().decode("utf-8", "replace")
+    print("channel check failed (HTTP %s): %s" % (e.code, body[:600]))
+    if "has not been used in project" in body or "is disabled" in body or "accessNotConfigured" in body:
+        api_disabled = True          # token is fine; the API just is not switched on yet
+        ch = {}
+    else:
+        sys.exit("cannot verify the channel - nothing saved")
 names = [c["snippet"]["title"] for c in ch.get("items", [])]
 
 # Save straight to GitHub - nothing secret is printed or pasted anywhere.
 import os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from github_secret import set_secret
-if not names:
+if not names and not api_disabled:
     sys.exit("no YouTube channel on that Google account - nothing saved. Re-run and pick the @Ramonhouses account.")
+if api_disabled:
+    print("\nYouTube Data API v3 is NOT enabled on this project - enable it at\n"
+          "  https://console.cloud.google.com/apis/library/youtube.googleapis.com\n"
+          "The token below is valid and is being saved so you do not have to sign in again.")
 print("\nSaving to GitHub secrets:")
 set_secret("YT_CLIENT_ID", client_id)
 set_secret("YT_CLIENT_SECRET", client_secret)
