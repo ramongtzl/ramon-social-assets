@@ -370,3 +370,7 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-09-26T10:04:10.621879-07:00,re-en-day-07,fb:414239392030697,RE Single EN,Day 07,414239392030697_122228870972048227,ok,
 2026-09-26T10:04:10.621879-07:00,re-en-day-07,li:person,RE Single EN,Day 07,urn:li:share:7509659309576937472,ok,
 2026-09-26T10:04:10.621879-07:00,re-en-day-07,threads,RE Single EN,Day 07,18140398096525370,ok,
+2026-09-26T12:47:14.222965-07:00,reel-es-w04a,ig:ramonhouses,Reel ES,w04a,17902509396665236,ok,
+2026-09-26T12:47:14.222965-07:00,reel-es-w04a,fb:414239392030697,Reel ES,w04a,1403693768561464,ok,
+2026-09-26T12:47:14.222965-07:00,reel-es-w04a,yt,Reel ES,w04a,ZVUxExA03xI,ok,
+2026-09-26T12:47:14.222965-07:00,reel-es-w04a,threads,Reel ES,w04a,,error,threads container 17924217975424903 ERROR: UNKNOWN
