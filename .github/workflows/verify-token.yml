@@ -87,7 +87,12 @@ jobs:
           #    these URLs itself, so what matters is that they return an image
           #    content-type, not merely HTTP 200 - a GitHub 404 page is a 200
           #    to nothing and an HTML body to Graph.
-          rows = list(csv.DictReader(io.open("schedule.csv", encoding="utf-8-sig")))
+          # upcoming rows only: maintain.py prunes reels once they have posted,
+          # so a past row's file is expected to 404 (w02a did, 2026-09-27)
+          import datetime
+          today = datetime.date.today().isoformat()
+          rows = [r for r in csv.DictReader(io.open("schedule.csv", encoding="utf-8-sig"))
+                  if r["post_date"] >= today]
           seen, checked = set(), 0
           for r in rows:
               for rel in r["images"].split("|"):
