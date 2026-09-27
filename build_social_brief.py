@@ -165,6 +165,14 @@ def build(now, pull=True):
 
     open_recs = [r for r in recs if r.get("status", "open") == "open"]
 
+    # audience - measured engagement from the encrypted collect-stats snapshot
+    try:
+        import stats_report
+        aud = stats_report.section(now.astimezone())
+    except Exception as ex:                           # noqa: BLE001 - never block the brief
+        aud = None
+        print("stats section skipped: %s" % ex)
+
     # ---------- text ----------
     T = []
     T.append("SOCIAL POSTING BRIEF - %s" % today.strftime("%A %d %b %Y"))
@@ -197,6 +205,10 @@ def build(now, pull=True):
     T.append("FLAGS")
     T.extend("  - " + f for f in flags) if flags else T.append("  none - agent healthy")
     T.append("")
+    if aud:
+        T.append("AUDIENCE & WHAT WORKED")
+        T.extend(aud[0])
+        T.append("")
     T.append("OPEN RECOMMENDATIONS (%d)" % len(open_recs))
     for r in open_recs:
         T.append("  - [%s] %s" % (r.get("date", ""), r["text"]))
@@ -269,6 +281,10 @@ def build(now, pull=True):
         H.append("<ul>" + "".join('<li style="color:%s">%s</li>' % (RED, e(f)) for f in flags) + "</ul>")
     else:
         H.append('<div style="color:%s">None - agent healthy. Last successful publish %s.</div>' % (GREEN, e(last_ok[:16].replace("T", " "))))
+
+    if aud:
+        section("Audience & what worked", "weekly breakdown" if now.weekday() == 0 else "full breakdown on Mondays")
+        H.append(aud[1])
 
     # recommendations
     section("Exposure & growth - open recommendations", "%d" % len(open_recs))

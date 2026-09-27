@@ -1,0 +1,52 @@
+# Daily engagement snapshot - READ-ONLY, never posts.
+#
+# Reads likes / comments / followers / YouTube views for everything in
+# post-log.csv and commits them ENCRYPTED (STATS_KEY) as stats/stats.enc,
+# because this repo is public. stats_report.py decrypts it on Ramon's PC for
+# the daily social brief (Routine 30, 6:15 AM Pacific).
+
+name: collect-stats
+
+on:
+  schedule:
+    - cron: "35 12 * * *"       # 12:35 UTC = 05:35 PDT / 04:35 PST, before the brief
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ig-post                # same group as post.yml so the two never push at once
+  cancel-in-progress: false
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install --quiet cryptography
+
+      - name: Collect engagement
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          IG_USER_GROWTH: ${{ secrets.IG_USER_GROWTH }}
+          IG_USER_HOUSES: ${{ secrets.IG_USER_HOUSES }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          STATS_KEY: ${{ secrets.STATS_KEY }}
+        run: python collect_stats.py
+
+      - name: Commit the encrypted snapshot
+        run: |
+          git config user.name  "posting-agent"
+          git config user.email "actions@github.com"
+          git add stats/stats.enc
+          git diff --cached --quiet || git commit -m "stats $(date -u +%Y-%m-%d)"
+          git pull --rebase || true
+          git push
