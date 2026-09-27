@@ -24,7 +24,7 @@ W1_TUE = datetime.date(2026, 9, 1)           # carousel week 1 (same as the buil
 EFFECTIVE = datetime.date(2026, 9, 28)       # rules apply from this date on; history stays as posted
 BOOK_TIMES = {"Round 2": "07:00", "Round 2b": "19:00"}
 B_WEEKS = range(5, 53)                        # only weeks whose white render exists get rows
-ASSET_CAP_MB = 950                            # GitHub Pages ceiling is 1 GB
+ASSET_CAP_MB = 920                            # MiB (du -sm). GitHub Pages ceiling is 1 GB = ~954 MiB; keep ~35 MiB spare
 TAGS = {"en": "#FraserValleyRealEstate #LangleyRealEstate #BCRealEstate #RealEstateTips #ramonhouses",
         "es": "#BienesRaicesBC #FraserValley #Langley #InmobiliariaBC #AgenteEnEspanol #ramonhouses"}
 DISCLOSURE = u"Ramon Gutierrez PREC · eXp Realty · ramonhouses.com"
@@ -100,7 +100,7 @@ def apply(rows, arch=None, assets=None, today=None, log=print):
     if not os.path.isdir(arch):
         log("schedule_rules: archive not reachable (%s) - b-slot rows not added" % arch)
     else:
-        room = _assets_mb(assets) < ASSET_CAP_MB
+        size_mb = _assets_mb(assets)             # running total, checked before every new reel
         for week in B_WEEKS:
             slot = "w%02db" % week
             tue = W1_TUE + datetime.timedelta(days=7 * (week - 1))
@@ -133,9 +133,12 @@ def apply(rows, arch=None, assets=None, today=None, log=print):
                         and rdate > today and pid not in have:
                     rname = "%s%s.mp4" % (slot, suffix)
                     dst = os.path.join(assets, "reels", rname)
-                    if not os.path.exists(dst) and not room:
-                        log("schedule_rules: assets over %d MB - %s not added" % (ASSET_CAP_MB, pid))
-                        continue
+                    if not os.path.exists(dst):
+                        mb = os.path.getsize(reel) / 1048576.0
+                        if size_mb + mb > ASSET_CAP_MB:
+                            log("schedule_rules: would pass %d MB - %s not added" % (ASSET_CAP_MB, pid))
+                            continue
+                        size_mb += mb
                     _copy(reel, dst)
                     cap = _caption(folder, lang, n_slides)
                     fb, li = _variants(cap)

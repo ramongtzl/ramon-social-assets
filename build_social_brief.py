@@ -172,6 +172,23 @@ def build(now, pull=True):
     except Exception as ex:                           # noqa: BLE001
         print("question check skipped: %s" % ex)
 
+    try:                                              # white b-reels rendered but held back by the storage cap
+        import schedule_rules, glob as _g
+        have = {r["post_id"] for r in rows}
+        waiting = []
+        for root, suffix, lang in (("ramonhouses-realestate-carousels", "", "en"),
+                                   ("ramonhouses-realestate-carousels-es", "-es", "es")):
+            for mark in _g.glob(os.path.join(schedule_rules.VAULT_SMC, "_IG-ARCHIVE", root, "w??b", ".white-reel")):
+                slot = os.path.basename(os.path.dirname(mark))
+                if "reel-%s-%s" % (lang, slot) not in have:
+                    waiting.append(slot + suffix)
+        if waiting:
+            flags.append("%d white b-reel%s rendered but not scheduled (storage cap): %s. Run "
+                         "python schedule_rules.py in the repo after the Monday prune, then commit + push."
+                         % (len(waiting), "" if len(waiting) == 1 else "s", ", ".join(sorted(waiting))))
+    except Exception as ex:                           # noqa: BLE001
+        print("b-reel check skipped: %s" % ex)
+
     open_recs = [r for r in recs if r.get("status", "open") == "open"]
 
     # audience - measured engagement from the encrypted collect-stats snapshot
