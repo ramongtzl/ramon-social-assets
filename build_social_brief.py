@@ -163,6 +163,15 @@ def build(now, pull=True):
     if last_ok and last_ok[:10] < yday.isoformat():
         flags.append("No successful publish since %s." % last_ok[:16].replace("T", " "))
 
+    try:                                              # questions.csv (caption_tune) running out
+        import caption_tune
+        q_left = caption_tune.upcoming_questions(rows, today.isoformat())
+        if not q_left or q_left[-1] < (today + datetime.timedelta(days=7)).isoformat():
+            flags.append("Comment questions run out %s - add rows to questions.csv (post_id,question) "
+                         "for the next 30 days of @ramonhouses posts." % (q_left[-1] if q_left else "now"))
+    except Exception as ex:                           # noqa: BLE001
+        print("question check skipped: %s" % ex)
+
     open_recs = [r for r in recs if r.get("status", "open") == "open"]
 
     # audience - measured engagement from the encrypted collect-stats snapshot

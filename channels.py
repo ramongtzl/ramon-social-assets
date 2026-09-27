@@ -26,7 +26,7 @@ secrets) - never hardcode an id or a token here.
 A target that has no configuration is skipped with a clear log line, never an
 exception, so one missing secret can never stop the other channels.
 """
-import os, io, json, time, urllib.request, urllib.parse, urllib.error
+import os, io, re, json, time, urllib.request, urllib.parse, urllib.error
 
 GRAPH = "https://graph.facebook.com/v21.0"
 LI_API = "https://api.linkedin.com"
@@ -302,13 +302,44 @@ def yt_publish(video_url, title, description, tags=None):
     return r.get("id")
 
 
+YT_PLACE_EN = " | Langley BC Real Estate"
+YT_PLACE_ES = " | Bienes Raíces Langley BC"
+YT_TAGS_EN = ["Langley real estate", "Fraser Valley real estate", "BC real estate", "home buying tips",
+              "Langley BC", "real estate tips"]
+YT_TAGS_ES = ["bienes raices BC", "Langley BC", "Fraser Valley", "comprar casa en Canada",
+              "agente en espanol", "bienes raices Canada"]
+
+
+def _yt_spanish(caption):
+    return "Escríbeme" in caption or "#BienesRaicesBC" in caption or "Cuéntame" in caption
+
+
 def yt_title_from_caption(caption, ref=""):
-    """First non-empty caption line, trimmed to YouTube's 100 chars."""
-    for line in caption.split("\n"):
-        line = line.strip()
-        if line and not line.startswith("#"):
-            return (line[:92] + " #Shorts") if len(line) > 92 else line + " #Shorts"
-    return ("Ramon Houses %s" % ref).strip() + " #Shorts"
+    """First non-empty caption line + a place keyword + #Shorts, within YouTube's 100.
+
+    The place keyword is what makes a Short findable in search ("strata documents
+    Langley"); a bare topic line competes with every creator in the world.
+    """
+    line = next((l.strip() for l in caption.splitlines()
+                 if l.strip() and not l.strip().startswith("#")), "") or ("Ramon Houses %s" % ref).strip()
+    place = "" if re.search(r"Langley|\bBC\b|Fraser Valley|Abbotsford|Surrey|Vancouver", line) else \
+        (YT_PLACE_ES if _yt_spanish(caption) else YT_PLACE_EN)
+    room = 100 - len(place) - len(" #Shorts")
+    if len(line) > room:
+        line = line[:room - 1].rstrip() + "…"
+    return line + place + " #Shorts"
+
+
+def yt_tags(caption):
+    """Caption hashtags first, then the search phrases, deduped, inside YouTube's 500-char budget."""
+    tags = [t.lstrip("#") for t in caption.split() if t.startswith("#")]
+    tags += YT_TAGS_ES if _yt_spanish(caption) else YT_TAGS_EN
+    out, seen, size = [], set(), 0
+    for t in tags:
+        if t.lower() in seen or size + len(t) + 2 > 480:
+            continue
+        seen.add(t.lower()); out.append(t); size += len(t) + 2
+    return out
 
 
 # ------------------------------------------------------------- threads
@@ -489,7 +520,6 @@ def fan_out(channels, kind, urls, caption, ref, ig_token, already, dry=False,
         elif kind != "reel":
             print("     yt: only video rows go to YouTube - skipped")
         else:
-            tags = [t.lstrip("#") for t in caption.split() if t.startswith("#")]
             _run("yt", lambda: yt_publish(urls[0], yt_title_from_caption(caption, ref),
-                                          caption, tags))
+                                          caption, yt_tags(caption)))
     return done, fails

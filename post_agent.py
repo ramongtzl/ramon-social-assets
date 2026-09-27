@@ -35,6 +35,7 @@ Never commit a token. Never hardcode one here.
 import os, io, csv, json, sys, time, urllib.request, urllib.parse, urllib.error
 import datetime
 import channels as extra
+import caption_tune
 
 def _pacific():
     """America/Vancouver, however this machine can give it to us.
@@ -247,6 +248,10 @@ def main():
     fails = 0
 
     for r in rows:
+        try:                                    # questions / reel wording - never block a post
+            r = caption_tune.tune(r)
+        except Exception as e:                  # noqa: BLE001
+            print("     caption_tune skipped: %s" % str(e)[:200])
         pid = r["post_id"]
         acct = r["account"]
         uid = USERS.get(acct, "")
