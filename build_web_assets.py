@@ -327,6 +327,14 @@ if os.path.exists(_extras):
     if _added:
         print("merged %d row(s) from extras.csv" % _added)
 
+# Standing growth rules (2026-09-27): book-card times, white 'b' reels Mon/Thu,
+# Sunday 'b' carousel. Kept in schedule_rules.py so a rebuild re-applies them.
+try:
+    import schedule_rules
+    rows = schedule_rules.apply(rows, arch=ARCH, assets=ASSETS)
+except ImportError:
+    print("schedule_rules.py missing - growth rules NOT applied")
+
 rows.sort(key=lambda r: (r["post_date"], r["time"], r["series"]))
 
 f = io.open(os.path.join(HERE, "schedule.csv"), "w", encoding="utf-8-sig", newline="")
