@@ -180,6 +180,10 @@ def build(now, pull=True):
                                    ("ramonhouses-realestate-carousels-es", "-es", "es")):
             for mark in _g.glob(os.path.join(schedule_rules.VAULT_SMC, "_IG-ARCHIVE", root, "w??b", ".white-reel")):
                 slot = os.path.basename(os.path.dirname(mark))
+                rdate = schedule_rules.W1_TUE + datetime.timedelta(
+                    days=7 * (int(slot[1:3]) - 1) + (6 if lang == "en" else 9))
+                if rdate > today + datetime.timedelta(days=schedule_rules.REEL_WINDOW_DAYS) or rdate <= today:
+                    continue                          # outside the hosting window - the daily roll adds it later
                 if "reel-%s-%s" % (lang, slot) not in have:
                     waiting.append(slot + suffix)
         if waiting:
