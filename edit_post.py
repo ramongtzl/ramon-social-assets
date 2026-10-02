@@ -53,26 +53,43 @@ def fb_edit(post_id):
     show(new)
 
 
+def li_posted_text(urn):
+    """The app's token cannot READ posts (w_member_social only), so rebuild the
+    text that was published: post-log.csv maps the URN to its post_id, and the
+    agent sent caption_li, falling back to caption (channels.fan_out._cap)."""
+    import csv, io
+    pid = next((r["post_id"] for r in csv.DictReader(io.open("post-log.csv", encoding="utf-8-sig"))
+                if r.get("media_id") == urn), None)
+    if not pid:
+        raise RuntimeError("urn not found in post-log.csv")
+    row = next((r for r in csv.DictReader(io.open("schedule.csv", encoding="utf-8-sig"))
+                if r["post_id"] == pid), None)
+    if not row:
+        raise RuntimeError("post_id %s not in schedule.csv" % pid)
+    return ((row.get("caption_li") or "").strip() or row["caption"])
+
+
 def li_edit(urn):
     tok = os.environ["LI_ACCESS_TOKEN"]
     url = "%s/rest/posts/%s" % (ch.LI_API, urllib.parse.quote(urn, safe=""))
-    for step in range(12):
-        try:
-            cur = ch._http(url, headers=ch.li_headers(tok, json_body=False)).get("commentary", "")
-            break
-        except RuntimeError as e:
-            if "NONEXISTENT_VERSION" not in str(e):
-                raise
-            ch.LI_VERSION = ch._months_back(2 + step + 1)
+    cur = li_posted_text(urn)
     n = cur.count(find)
     if not n:
         print("   skip  li %s: text not found (already fixed?)" % urn)
         return
     new = cur.replace(find, repl)
     if not dry:
-        h = ch.li_headers(tok)
-        h["X-RestLi-Method"] = "PARTIAL_UPDATE"
-        ch._http(url, json.dumps({"patch": {"$set": {"commentary": new}}}), h, method="POST", raw=True)
+        body = json.dumps({"patch": {"$set": {"commentary": new}}})
+        for step in range(12):
+            h = ch.li_headers(tok)
+            h["X-RestLi-Method"] = "PARTIAL_UPDATE"
+            try:
+                ch._http(url, body, h, method="POST", raw=True)
+                break
+            except RuntimeError as e:
+                if "NONEXISTENT_VERSION" not in str(e):
+                    raise
+                ch.LI_VERSION = ch._months_back(2 + step + 1)
     print("   %s li %s (%d occurrence%s)" % ("would" if dry else "done ", urn, n, "" if n == 1 else "s"))
     show(new)
 
