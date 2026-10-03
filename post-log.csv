@@ -475,3 +475,11 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-10-02T14:16:50.134201-07:00,rq-10-en,fb:414239392030697,RE Quote EN,Card 10,414239392030697_122229434822048227,ok,
 2026-10-02T14:16:50.134201-07:00,rq-10-en,li:person,RE Quote EN,Card 10,urn:li:share:7511897456473735168,ok,
 2026-10-02T14:16:50.134201-07:00,rq-10-en,threads,RE Quote EN,Card 10,18102656870457716,ok,
+2026-10-02T18:04:34.076717-07:00,oh-2026-10-03-461-carlsen-es,ig:ramonhouses,Open House,461 Carlsen Pl R3149832,17908448295476324,ok,
+2026-10-02T18:04:34.076717-07:00,oh-2026-10-03-461-carlsen-es,fb:414239392030697,Open House,461 Carlsen Pl R3149832,414239392030697_122229457766048227,ok,
+2026-10-02T18:04:34.076717-07:00,oh-2026-10-03-461-carlsen-es,li:person,Open House,461 Carlsen Pl R3149832,urn:li:share:7511954384486875136,ok,
+2026-10-02T18:04:34.076717-07:00,oh-2026-10-03-461-carlsen-es,threads,Open House,461 Carlsen Pl R3149832,18418350685154857,ok,
+2026-10-02T18:04:34.076717-07:00,oh-2026-10-04-418-montrose-en,ig:ramonhouses,Open House,418-2493 Montrose Ave R3164794,18087670916682869,ok,
+2026-10-02T18:04:34.076717-07:00,oh-2026-10-04-418-montrose-en,fb:414239392030697,Open House,418-2493 Montrose Ave R3164794,414239392030697_122229457886048227,ok,
+2026-10-02T18:04:34.076717-07:00,oh-2026-10-04-418-montrose-en,li:person,Open House,418-2493 Montrose Ave R3164794,urn:li:share:7511954513906556928,ok,
+2026-10-02T18:04:34.076717-07:00,oh-2026-10-04-418-montrose-en,threads,Open House,418-2493 Montrose Ave R3164794,,error,"HTTP 400: {""error"":{""message"":""The requested resource does not exist"",""type"":""OAuthException"",""code"":24,""error_subcode"":4279009,""is_transient"":false,""error_user_title"":""Media Not Found"",""error_user_msg"":""The media with id 17925152028424903 cannot be found."",""fbtrace_id"":""Atnku_d-UU0JWEYlSl8OCm1""}}"
