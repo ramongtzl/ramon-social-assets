@@ -483,3 +483,7 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-10-02T18:04:34.076717-07:00,oh-2026-10-04-418-montrose-en,fb:414239392030697,Open House,418-2493 Montrose Ave R3164794,414239392030697_122229457886048227,ok,
 2026-10-02T18:04:34.076717-07:00,oh-2026-10-04-418-montrose-en,li:person,Open House,418-2493 Montrose Ave R3164794,urn:li:share:7511954513906556928,ok,
 2026-10-02T18:04:34.076717-07:00,oh-2026-10-04-418-montrose-en,threads,Open House,418-2493 Montrose Ave R3164794,,error,"HTTP 400: {""error"":{""message"":""The requested resource does not exist"",""type"":""OAuthException"",""code"":24,""error_subcode"":4279009,""is_transient"":false,""error_user_title"":""Media Not Found"",""error_user_msg"":""The media with id 17925152028424903 cannot be found."",""fbtrace_id"":""Atnku_d-UU0JWEYlSl8OCm1""}}"
+2026-10-02T19:01:43.697482-07:00,oh-2026-10-04-th01-fraser-en,ig:ramonhouses,Open House,1-20723 Fraser Hwy R3139875,18138106822620500,ok,
+2026-10-02T19:01:43.697482-07:00,oh-2026-10-04-th01-fraser-en,fb:414239392030697,Open House,1-20723 Fraser Hwy R3139875,414239392030697_122229460868048227,ok,
+2026-10-02T19:01:43.697482-07:00,oh-2026-10-04-th01-fraser-en,li:person,Open House,1-20723 Fraser Hwy R3139875,urn:li:share:7511968781733142528,ok,
+2026-10-02T19:01:43.697482-07:00,oh-2026-10-04-th01-fraser-en,threads,Open House,1-20723 Fraser Hwy R3139875,18140916466521076,ok,
