@@ -1,9 +1,9 @@
 {
-  "checked": "2026-09-28",
-  "reels_queued": 47,
-  "reels_through": "2026-12-21",
+  "checked": "2026-10-05",
+  "reels_queued": 49,
+  "reels_through": "2026-12-28",
   "reel_weeks_left": 12.0,
-  "image_posts_queued": 1210,
-  "assets_mb": 531.9,
-  "pruned_this_run": 0
+  "image_posts_queued": 1180,
+  "assets_mb": 542.8,
+  "pruned_this_run": 6
 }
