@@ -182,6 +182,10 @@ def log_row(row):
 
 
 # --------------------------------------------------------------- main
+EVENING_FROM = 17     # slots at/after this hour may post after midnight
+MORNING_CUTOFF = 7    # ...until this hour the next morning (Pacific)
+
+
 def due_rows(now):
     """Rows scheduled for today whose hour matches, and not already posted.
 
@@ -202,14 +206,24 @@ def due_rows(now):
         return [by_id[f] for f in forced if f in by_id]
 
     today = now.date().isoformat()
+    yesterday = (now.date() - datetime.timedelta(days=1)).isoformat()
     hour = now.hour
     out = []
     for r in csv.DictReader(io.open(SCHED, encoding="utf-8-sig")):
-        if r["post_date"] != today:
-            continue
         try:
             slot = int(r["time"].split(":")[0])
         except ValueError:
+            continue
+        # Evening carry-over (2026-10-15): the 19:00 Round 2b slot was silent
+        # Oct 11-14 because GitHub's next run after 19:00 Pacific landed after
+        # midnight, when "today" had already moved on. Yesterday's evening slots
+        # (>= EVENING_FROM) stay due until MORNING_CUTOFF; state dedupe still
+        # stops anything already published from repeating.
+        if (r["post_date"] == yesterday and slot >= EVENING_FROM
+                and hour < MORNING_CUTOFF):
+            out.append(r)
+            continue
+        if r["post_date"] != today:
             continue
         # Any slot for TODAY that has come round, not just this exact hour.
         #
