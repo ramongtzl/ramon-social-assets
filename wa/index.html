@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Open in WhatsApp Business</title>
+<style>
+  :root{--navy:#1C2B3F;--gold:#C9A45C;--bg:#F6F3EC;--ink:#1C2B3F;--muted:#5d6878;--card:#fff;--line:#e3ddd0}
+  @media (prefers-color-scheme: dark){:root{--bg:#11161e;--ink:#e8ecf2;--muted:#9aa5b5;--card:#18202b;--line:#2a3443}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,Segoe UI,Roboto,Arial,sans-serif}
+  header{background:var(--navy);color:#fff;padding:14px 16px;text-align:center}
+  header b{color:var(--gold);letter-spacing:.12em;font-size:12px;text-transform:uppercase;display:block}
+  main{max-width:520px;margin:0 auto;padding:16px}
+  .who{font-size:20px;font-weight:700;margin:6px 0 2px}
+  .ph{color:var(--muted)}
+  .btn{display:block;width:100%;text-align:center;padding:16px;border-radius:10px;font-weight:700;font-size:18px;text-decoration:none;margin:14px 0 8px;border:0;cursor:pointer}
+  .biz{background:#1a7f37;color:#fff}
+  .copy{background:var(--card);color:var(--ink);border:2px solid var(--gold)}
+  .msg{background:var(--card);border:1px solid var(--gold);border-radius:8px;padding:12px;white-space:pre-wrap;font-size:15px}
+  .small{font-size:13px;color:var(--muted)}
+  .small a{color:var(--muted)}
+  .err{color:#b23b3b}
+</style>
+</head>
+<body>
+<header><b>Ramon Gutierrez</b>Agent outreach · WhatsApp Business</header>
+<main>
+  <div id="ok" hidden>
+    <div class="who" id="who"></div>
+    <div class="ph" id="ph"></div>
+    <a class="btn biz" id="go">▶ Open in WhatsApp Business</a>
+    <button class="btn copy" id="cp">Copy message</button>
+    <div class="small" id="cpstate"></div>
+    <p class="small">The message below is already filled in when WhatsApp Business opens. Review it, then press send.</p>
+    <div class="msg" id="msg"></div>
+    <p class="small">Button does nothing? Tap "Copy message", open WhatsApp Business, start a chat with the number above, paste. · <a id="plain">Open in regular WhatsApp</a></p>
+  </div>
+  <p id="bad" class="err" hidden>This link is missing the phone number. Open it from the outreach email.</p>
+</main>
+<script>
+(function () {
+  // Everything travels in the #fragment, so it never reaches any server.
+  var h = new URLSearchParams(location.hash.slice(1));
+  var p = (h.get("p") || "").replace(/\D/g, "");
+  var t = h.get("t") || "";
+  var n = h.get("n") || "";
+  if (!p) { document.getElementById("bad").hidden = false; return; }
+  document.getElementById("ok").hidden = false;
+  document.getElementById("who").textContent = n || "WhatsApp message";
+  document.getElementById("ph").textContent = "+" + p;
+  document.getElementById("msg").textContent = t;
+  var wa = "https://wa.me/" + p + "?text=" + encodeURIComponent(t);
+  var intent = "intent://send/?phone=" + p + "&text=" + encodeURIComponent(t) +
+    "#Intent;scheme=whatsapp;package=com.whatsapp.w4b;S.browser_fallback_url=" + encodeURIComponent(wa) + ";end";
+  var isAndroid = /Android/i.test(navigator.userAgent);
+  var go = document.getElementById("go");
+  go.href = isAndroid ? intent : wa;
+  if (!isAndroid) go.textContent = "▶ Open in WhatsApp";
+  document.getElementById("plain").href = wa;
+  document.getElementById("cp").onclick = function () {
+    var s = document.getElementById("cpstate");
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject())
+      .then(function () { s.textContent = "Copied ✓"; })
+      .catch(function () { s.textContent = "Press and hold the message below to copy it."; });
+  };
+})();
+</script>
+</body>
+</html>
