@@ -9,3 +9,4 @@ __pycache__/
 token*.json
 *secret*
 briefs/
+print/**/.build/
