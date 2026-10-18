@@ -867,3 +867,5 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-10-17T15:11:36.159499-07:00,bs-04-p3-en,fb:414239392030697,Blog Series EN,Blog 04 Part 3,414239392030697_122230853276048227,ok,
 2026-10-17T15:11:36.159499-07:00,bs-04-p3-en,li:person,Blog Series EN,Blog 04 Part 3,urn:li:share:7517346835254906880,ok,
 2026-10-17T15:11:36.159499-07:00,bs-04-p3-en,threads,Blog Series EN,Blog 04 Part 3,17990910257859068,ok,
+2026-10-17T22:44:32.035935-07:00,r2b-day-048,ig:growthwealth,Round 2b,Day 048,,error,"HTTP 400: {""error"":{""message"":""Media ID is not available"",""type"":""OAuthException"",""code"":9007,""error_subcode"":2207027,""is_transient"":false,""error_user_title"":""Cannot Publish"",""error_user_msg"":""The media is not ready for publishing, please wait for a moment"",""fbtrace_id"":""AvUY7fWADwYQ03VySpd6GBR""}}"
+2026-10-17T22:44:32.035935-07:00,r2b-day-048,fb:543998318793132,Round 2b,Day 048,543998318793132_122183809136716289,ok,
