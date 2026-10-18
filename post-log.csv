@@ -870,3 +870,5 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-10-17T22:44:32.035935-07:00,r2b-day-048,ig:growthwealth,Round 2b,Day 048,,error,"HTTP 400: {""error"":{""message"":""Media ID is not available"",""type"":""OAuthException"",""code"":9007,""error_subcode"":2207027,""is_transient"":false,""error_user_title"":""Cannot Publish"",""error_user_msg"":""The media is not ready for publishing, please wait for a moment"",""fbtrace_id"":""AvUY7fWADwYQ03VySpd6GBR""}}"
 2026-10-17T22:44:32.035935-07:00,r2b-day-048,fb:543998318793132,Round 2b,Day 048,543998318793132_122183809136716289,ok,
 2026-10-18T03:54:14.250968-07:00,r2b-day-048,ig:growthwealth,Round 2b,Day 048,18411511810082557,ok,
+2026-10-18T07:02:36.777601-07:00,r2-day-049,ig:growthwealth,Round 2,Day 049,18112305932141315,ok,
+2026-10-18T07:02:36.777601-07:00,r2-day-049,fb:543998318793132,Round 2,Day 049,543998318793132_122183845364716289,ok,
