@@ -116,13 +116,26 @@ def _wait_ready(container_id, timeout=180):
     raise RuntimeError("container %s not ready within %ds" % (container_id, timeout))
 
 
+def _publish(user_id, creation_id, tries=6):
+    """Meta can report a container FINISHED and still refuse media_publish for a
+    few seconds (code 9007, subcode 2207027, "media is not ready"). Retry that
+    one error with a short back-off; anything else is raised as before."""
+    for n in range(tries):
+        try:
+            return _call("%s/%s/media_publish" % (GRAPH, user_id),
+                         {"creation_id": creation_id, "access_token": TOKEN})
+        except RuntimeError as e:
+            if "2207027" not in str(e) or n == tries - 1:
+                raise
+            time.sleep(10 * (n + 1))
+
+
 # --------------------------------------------------------------- publish
 def publish_single(user_id, image_url, caption):
     c = _call("%s/%s/media" % (GRAPH, user_id),
               {"image_url": image_url, "caption": caption, "access_token": TOKEN})
     _wait_ready(c["id"])
-    r = _call("%s/%s/media_publish" % (GRAPH, user_id),
-              {"creation_id": c["id"], "access_token": TOKEN})
+    r = _publish(user_id, c["id"])
     return r.get("id")
 
 
@@ -141,8 +154,7 @@ def publish_carousel(user_id, image_urls, caption):
                     "children": ",".join(children),
                     "caption": caption, "access_token": TOKEN})
     _wait_ready(parent["id"])
-    r = _call("%s/%s/media_publish" % (GRAPH, user_id),
-              {"creation_id": parent["id"], "access_token": TOKEN})
+    r = _publish(user_id, parent["id"])
     return r.get("id")
 
 
@@ -154,8 +166,7 @@ def publish_reel(user_id, video_url, caption):
                "caption": caption, "share_to_feed": "true",
                "access_token": TOKEN})
     _wait_ready(c["id"], timeout=600)
-    r = _call("%s/%s/media_publish" % (GRAPH, user_id),
-              {"creation_id": c["id"], "access_token": TOKEN})
+    r = _publish(user_id, c["id"])
     return r.get("id")
 
 
