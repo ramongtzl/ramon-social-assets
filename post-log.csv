@@ -1076,3 +1076,8 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-10-25T11:21:09.913045-07:00,car-es-w08b,ig:ramonhouses,Carousel ES,w08b,18013443968991979,ok,
 2026-10-25T11:21:09.913045-07:00,car-es-w08b,fb:414239392030697,Carousel ES,w08b,414239392030697_122231641844048227,ok,
 2026-10-25T11:21:09.913045-07:00,car-es-w08b,threads,Carousel ES,w08b,,error,"HTTP 400: {""error"":{""message"":""The requested resource does not exist"",""type"":""OAuthException"",""code"":24,""error_subcode"":4279009,""is_transient"":false,""error_user_title"":""Media Not Found"",""error_user_msg"":""The media with id 17928671388424903 cannot be found."",""fbtrace_id"":""AM6DggLn28G0YcATIag_d3q""}}"
+2026-10-25T14:39:35.207296-07:00,car-es-w08b,threads,Carousel ES,w08b,17914836552499421,ok,
+2026-10-25T14:39:35.207296-07:00,cs-2026-10-24-alexa-reel-en,ig:ramonhouses,Coming Soon,20834 80 Ave (Alexander Square),18116163488468369,ok,
+2026-10-25T14:39:35.207296-07:00,cs-2026-10-24-alexa-reel-en,fb:414239392030697,Coming Soon,20834 80 Ave (Alexander Square),1627854942170974,ok,
+2026-10-25T14:39:35.207296-07:00,cs-2026-10-24-alexa-reel-en,threads,Coming Soon,20834 80 Ave (Alexander Square),17911605441490166,ok,
+2026-10-25T14:39:35.207296-07:00,cs-2026-10-24-alexa-reel-en,yt,Coming Soon,20834 80 Ave (Alexander Square),1tECZ0Fdz9Q,ok,
