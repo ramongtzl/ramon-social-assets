@@ -172,6 +172,12 @@ def build(now, pull=True):
     except Exception as ex:                           # noqa: BLE001
         print("question check skipped: %s" % ex)
 
+    # Lifestyle series (replaces Social Suite, 2026-10-24): Ramon wants a warning ONE MONTH before it runs out
+    life = sorted(r["post_date"] for r in rows if r.get("series") == "Lifestyle")
+    if not life or life[-1] < (today + datetime.timedelta(days=30)).isoformat():
+        flags.append("Lifestyle posts run out %s - build the next 3 months (content-studio make_lifestyle_post.py, "
+                     "Mon/Wed/Fri 16:00, photos in _BRAND/graphics/backgrounds/lifestyle)." % (life[-1] if life else "now"))
+
     try:                                              # white b-reels rendered but held back by the storage cap
         import schedule_rules, glob as _g
         have = {r["post_id"] for r in rows}
