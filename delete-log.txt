@@ -3,3 +3,7 @@
    FAIL  fb 414239392030697_122232026642048227: HTTP 400: {"error":{"message":"Unsupported delete request. Object with ID '414239392030697_122232026642048227' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"ABzjmLEuZWTTwts7qM3fRr3"}}
    FAIL  li urn:li:share:7521238465045487616: HTTP 404: {"code":"NOT_FOUND","message":"Could not find entity","status":404}
    FAIL  threads 18086961368713901: HTTP 403: {"error":{"message":"Application does not have permission for this action","code":10,"type":"THApiException","fbtrace_id":"AZ9SfXMI06dTUyVml1GHo1I"}}
+2026-10-28T23:06:04.196243 DRY RUN
+   would delete ig 18159555640517241
+   would delete fb 414239392030697_122232036950048227
+   would delete threads 18200846311380208
