@@ -1,0 +1,32 @@
+# Delete already-published posts (see delete_post.py).
+# Manual only - triggered with auth/dispatch.py, never on a schedule.
+name: delete-published-post
+
+on:
+  workflow_dispatch:
+    inputs:
+      targets:
+        description: "Comma-separated ig:<id>, fb:<id>, li:<urn>, threads:<id> (from post-log.csv)"
+        type: string
+        required: true
+      dry_run:
+        description: "List what would be deleted, delete nothing"
+        type: boolean
+        default: true
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Delete posts
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          LI_ACCESS_TOKEN: ${{ secrets.LI_ACCESS_TOKEN }}
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+          TARGETS: ${{ inputs.targets }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+        run: python delete_post.py
