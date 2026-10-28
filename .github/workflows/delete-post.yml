@@ -14,6 +14,9 @@ on:
         type: boolean
         default: true
 
+permissions:
+  contents: write
+
 jobs:
   delete:
     runs-on: ubuntu-latest
@@ -30,3 +33,11 @@ jobs:
           TARGETS: ${{ inputs.targets }}
           DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
         run: python delete_post.py
+      - name: Commit the result log
+        if: always()
+        run: |
+          git config user.name  "posting-agent"
+          git config user.email "actions@github.com"
+          git add delete-log.txt
+          git diff --cached --quiet || git commit -m "delete-post log"
+          git pull --rebase -q && git push || true
