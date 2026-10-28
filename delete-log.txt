@@ -7,3 +7,7 @@
    would delete ig 18159555640517241
    would delete fb 414239392030697_122232036950048227
    would delete threads 18200846311380208
+2026-10-28T23:08:16.527725 DELETE
+   FAIL  ig 18159555640517241: HTTP 400: {"error":{"message":"(#10) Insufficient permissions to access this data","code":10,"type":"OAuthException","fbtrace_id":"ABAqnFJ59sKr0R3SmzjuxiD"}}
+   done  fb 414239392030697_122232036950048227
+   FAIL  threads 18200846311380208: HTTP 403: {"error":{"message":"Application does not have permission for this action","code":10,"type":"THApiException","fbtrace_id":"AaWWEBdR853FKqdRkWrtF0T"}}
