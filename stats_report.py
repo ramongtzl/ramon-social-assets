@@ -163,7 +163,7 @@ def section(now, full=None):
     T, H = [], []
 
     def h_table(head, rows):
-        H.append('<table cellpadding="5" cellspacing="0" style="border-collapse:collapse;width:100%;font-size:13px;margin:4px 0 10px">')
+        H.append('<table cellpadding="5" cellspacing="0" style="border-collapse:collapse;width:100%;font-size:15px;margin:4px 0 10px">')
         H.append("<tr>" + "".join('<th align="left" style="border-bottom:2px solid %s;color:%s">%s</th>' % (NAVY, NAVY, e(h)) for h in head) + "</tr>")
         for cells in rows:
             H.append("<tr>" + "".join('<td valign="top" style="border-bottom:1px solid #dfe5ec">%s</td>' % c for c in cells) + "</tr>")
@@ -180,7 +180,7 @@ def section(now, full=None):
     for p, n, f, d1, d7 in fol:
         T.append("    %-9s %-26s %6s  1d %4s  7d %4s" % (p, n, f, sign(d1), sign(d7)))
     if days < 7:
-        H.append('<div style="color:%s;font-size:12px">History started %d day%s ago - the 7-day change fills in after a week.</div>'
+        H.append('<div style="color:%s;font-size:14px">History started %d day%s ago - the 7-day change fills in after a week.</div>'
                  % (MUTED, days, "" if days == 1 else "s"))
 
     # top posts
@@ -195,7 +195,7 @@ def section(now, full=None):
                 [[str(i + 1),
                   ('<a href="%s" style="color:%s">%s · %s</a>' % (e(b["permalink"]), NAVY, e(b["series"]), e(b["ref"]))
                    if b["permalink"] else "%s · %s" % (e(b["series"]), e(b["ref"])))
-                  + '<div style="color:%s;font-size:12px">%s</div>' % (MUTED, e(cap.get(b["post_id"], ""))),
+                  + '<div style="color:%s;font-size:14px">%s</div>' % (MUTED, e(cap.get(b["post_id"], ""))),
                   "<b>%d</b>" % b["total"], sign_blank(b["ig"]), sign_blank(b["fb"]), sign_blank(b["yt_views"])]
                  for i, b in enumerate(rows)])
         for i, b in enumerate(rows):
@@ -235,7 +235,7 @@ def section(now, full=None):
              "Threads and LinkedIn are not measured (their tokens have no read-stats permission)."]
     if snap.get("error_counts"):
         notes.append("Some reads failed: %s." % ", ".join("%s %d" % kv for kv in snap["error_counts"].items()))
-    H.append('<div style="color:%s;font-size:12px">%s Snapshot %s UTC.</div>'
+    H.append('<div style="color:%s;font-size:14px">%s Snapshot %s UTC.</div>'
              % (MUTED, e(" ".join(notes)), e(snap["collected_utc"][:16].replace("T", " "))))
     T.append("    " + " ".join(notes))
     return T, "\n".join(H)

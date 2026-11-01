@@ -258,7 +258,7 @@ def build(now, pull=True):
     NAVY, GOLD, MUTED, RED, GREEN = "#0b2545", "#c9a227", "#5b6b7c", "#b00020", "#1b7f3b"
     e = html.escape
     H = []
-    H.append('<div style="font-family:Segoe UI,Arial,sans-serif;font-size:14px;color:#1c2733;max-width:760px">')
+    H.append('<div style="font-family:Segoe UI,Arial,sans-serif;font-size:16px;color:#1c2733;max-width:760px">')
     H.append('<div style="border-bottom:3px solid %s;padding:6px 0 10px"><div style="font-size:20px;font-weight:700;color:%s">'
              'Social posting brief</div><div style="color:%s">%s · @ramonhouses + @ramongtzl.growthwealth · times Pacific</div></div>'
              % (GOLD, NAVY, MUTED, e(today.strftime("%A %d %B %Y"))))
@@ -268,7 +268,7 @@ def build(now, pull=True):
                  '%s</div>' % (NAVY, GOLD, e(title), ('<span style="font-weight:400;color:%s"> %s</span>' % (MUTED, e(sub))) if sub else ""))
 
     def table(head, body_rows):
-        H.append('<table cellpadding="6" cellspacing="0" style="border-collapse:collapse;width:100%;font-size:13px">')
+        H.append('<table cellpadding="6" cellspacing="0" style="border-collapse:collapse;width:100%;font-size:15px">')
         H.append("<tr>" + "".join('<th align="left" style="border-bottom:2px solid %s;color:%s">%s</th>' % (NAVY, NAVY, e(h)) for h in head) + "</tr>")
         for cells in body_rows:
             H.append("<tr>" + "".join('<td valign="top" style="border-bottom:1px solid #dfe5ec">%s</td>' % c for c in cells) + "</tr>")
@@ -289,7 +289,7 @@ def build(now, pull=True):
             else:
                 cells.append('<span style="color:%s;font-weight:700">%s ✗</span>' % (RED, CHAN[c]))
         errs = [err for c, st, when, err in chans if st not in ("ok", "silent") and err]
-        note = ('<div style="color:%s;font-size:12px">%s</div>' % (RED, e(errs[0][:180]))) if errs else ""
+        note = ('<div style="color:%s;font-size:14px">%s</div>' % (RED, e(errs[0][:180]))) if errs else ""
         body.append([e(r["time"]), e(ACCOUNT[r["account"]]), e(r["series"]) + " · " + e(r["ref"]), " · ".join(cells) + note])
     table(["Time", "Account", "Post", "Result"], body) if body else H.append('<div style="color:%s">nothing was scheduled</div>' % MUTED)
 
@@ -301,7 +301,7 @@ def build(now, pull=True):
         done = bool(st) and all(s == "ok" for _, s, _, _ in st)
         chans = ", ".join(CHAN[c] for c in channels_for(r))
         body.append([e(r["time"]), e(ACCOUNT[r["account"]]),
-                     "<b>%s</b> · %s<div style=\"color:%s;font-size:12px\">%s</div>" % (e(r["series"]), e(r["ref"]), MUTED, e(first_line(r.get("caption", "")))),
+                     "<b>%s</b> · %s<div style=\"color:%s;font-size:14px\">%s</div>" % (e(r["series"]), e(r["ref"]), MUTED, e(first_line(r.get("caption", "")))),
                      e(chans) + (' <span style="color:%s">✓ posted</span>' % GREEN if done else "")])
     table(["Time", "Account", "Post", "Platforms"], body)
 
@@ -325,12 +325,12 @@ def build(now, pull=True):
     # recommendations
     section("Exposure & growth - open recommendations", "%d" % len(open_recs))
     if open_recs:
-        H.append("<ol>" + "".join('<li style="margin:4px 0"><span style="color:%s;font-size:12px">%s</span> %s</li>'
+        H.append("<ol>" + "".join('<li style="margin:4px 0"><span style="color:%s;font-size:14px">%s</span> %s</li>'
                                   % (MUTED, e(r.get("date", "")), e(r["text"])) for r in open_recs) + "</ol>")
     else:
         H.append('<div style="color:%s">Nothing open.</div>' % MUTED)
 
-    H.append('<div style="margin-top:16px;padding-top:8px;border-top:1px solid #dfe5ec;color:%s;font-size:12px">'
+    H.append('<div style="margin-top:16px;padding-top:8px;border-top:1px solid #dfe5ec;color:%s;font-size:14px">'
              'Last successful publish %s · reels queued through %s (%s weeks) · %d failures in the last 7 days · '
              'built %s from schedule.csv / post-log.csv</div></div>'
              % (MUTED, e(last_ok[:16].replace("T", " ") or "none"), e(str(health.get("reels_through", "?"))),
@@ -374,13 +374,13 @@ PAGE_TMPL = """<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title
 body{margin:0;background:#f4f6f9;font-family:Segoe UI,Arial,sans-serif;color:#1c2733}
 .brandbar{background:#0b2545;color:#fff;text-align:center;padding:16px 12px}
 .brandbar .name-line{font-size:18px}.brandbar .name-line strong{color:#fff}
-.brandbar .mba{background:#c9a227;color:#0b2545;font-weight:700;font-size:11px;padding:1px 6px;border-radius:4px;margin-left:4px}
+.brandbar .mba{background:#c9a227;color:#0b2545;font-weight:700;font-size:14px;padding:1px 6px;border-radius:4px;margin-left:4px}
 .brandbar .name-line span:last-child{color:#a9b7c6}
-.brandbar .tagline{color:#c9a227;text-transform:uppercase;letter-spacing:.14em;font-weight:700;font-size:12px;margin-top:4px}
+.brandbar .tagline{color:#c9a227;text-transform:uppercase;letter-spacing:.14em;font-weight:700;font-size:14px;margin-top:4px}
 .brandbar .links{margin-top:10px;display:flex;justify-content:center;flex-wrap:wrap;gap:8px}
-.brandbar .links a{display:inline-flex;align-items:center;gap:6px;color:#e6ecf2;text-decoration:none;border:1px solid #33507a;background:#132f5a;border-radius:999px;padding:5px 12px;font-size:12px}
+.brandbar .links a{display:inline-flex;align-items:center;gap:6px;color:#e6ecf2;text-decoration:none;border:1px solid #33507a;background:#132f5a;border-radius:999px;padding:5px 12px;font-size:14px}
 .brandbar .links svg{width:14px;height:14px}
-.infobar{background:#fff;border-bottom:1px solid #dfe5ec;padding:8px 16px;font-size:12px;color:#5b6b7c;display:flex;gap:18px;flex-wrap:wrap}
+.infobar{background:#fff;border-bottom:1px solid #dfe5ec;padding:8px 16px;font-size:14px;color:#5b6b7c;display:flex;gap:18px;flex-wrap:wrap}
 .wrap{max-width:820px;margin:18px auto;background:#fff;border:1px solid #dfe5ec;border-radius:10px;padding:18px 22px}
 </style></head><body>
 <div class="brandbar">
