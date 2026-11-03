@@ -14,3 +14,6 @@
 2026-11-03T01:34:48.093840 DELETE
    done  fb 414239392030697_122232464720048227
    done  li urn:li:ugcPost:7523164333862944768
+2026-11-03T01:37:59.936982 DELETE
+   FAIL  ig 18125102267476660: HTTP 400: {"error":{"message":"Unsupported delete request. Object with ID '18125102267476660' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https://developers.facebook.com/docs/graph-api","code":100,"type":"GraphMethodException","error_subcode":33,"fbtrace_id":"AOXArz_vzLnSdrmFKAJY08i"}}
+   FAIL  threads 18116250824031901: HTTP 400: {"error":{"message":"Unsupported delete request. Object with ID '18116250824031901' does not exist, cannot be loaded due to missing permissions, or does not support this operation","code":100,"type":"THApiException","error_subcode":33,"fbtrace_id":"A-6F_e-XAnXNRlBjABW-FYX"}}
