@@ -14,7 +14,8 @@ serves the image before the slot.
 
 Schedule (Ramon, 2026-11-07): Langley Eats EN Thursday + Saturday 12:00, the
 ES twin on another day with 2-3 posts between (never back to back);
-This Week EN Wednesday 13:00. Every third-party photo carries the photographer
+This Week EN (events, Langley first, then nearby cities) Friday 10:00 covering
+that Friday through the next Sunday, ES twin ~2 days later (Ramon, 2026-11-07). Every third-party photo carries the photographer
 credit (and their verified @handle) on the card and in the caption.
 """
 import argparse, csv, datetime, io, os, subprocess, sys
