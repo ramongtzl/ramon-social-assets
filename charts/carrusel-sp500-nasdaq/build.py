@@ -1,4 +1,4 @@
-"""Carrusel IG (ES) S&P 500 vs Nasdaq 2011-2025. Run: python3 build.py"""
+"""Carrusel IG (ES + EN) S&P 500 vs Nasdaq 2011-2025. Run: python3 build.py"""
 import os, base64, io
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -43,7 +43,7 @@ def slide(i,body,cover=False):
     return f"""<div class="s{' cover' if cover else ''}"><div class="main">{body}</div>
 <div class="foot"><div class="logo">RG</div><div><div class="h">@ramonhouses</div><div class="u">ramonhouses.com</div></div><div class="pg">{i} / {N}</div></div></div>"""
 LEG='<div class="leg"><span><i style="background:%s"></i>S&amp;P 500</span><span><i style="background:%s"></i>Nasdaq</span></div>'
-S=[
+S_ES=[
 slide(1,'''<div class="tag">INVERSIÓN</div><h1 class="big">¿Cuánto ha rendido la bolsa en 15 años?</h1><div class="rule"></div>
 <p>S&amp;P 500 vs Nasdaq, de 2011 a 2025. Los números reales, sin promesas.</p><div class="swipe">Desliza →</div>''',True),
 slide(2,'''<div class="num">1</div><h2>S&amp;P 500</h2><div class="rule"></div><div class="stat">~14%<small> al año</small></div>
@@ -61,6 +61,25 @@ slide(7,'''<div class="num">6</div><h2>Ojo: esto no es lo normal</h2><div class=
 slide(8,'''<h1 class="gold">El tiempo en el mercado le gana a adivinar el momento</h1><div class="rule"></div>
 <p>Igual que en bienes raíces: el patrimonio se construye con años, no con meses. Guarda este post y mándaselo a quien está empezando a invertir.</p>
 <p class="fine">Fuente: S&amp;P 500 rentabilidad total; Nasdaq Composite solo precio. 2025 aproximado. Rendimientos pasados no garantizan resultados futuros. Contenido educativo, no es asesoría financiera.</p>'''),
+]
+S_EN=[
+slide(1,'''<div class="tag">INVESTING</div><h1 class="big">What has the stock market returned in 15 years?</h1><div class="rule"></div>
+<p>S&amp;P 500 vs Nasdaq, 2011 to 2025. The real numbers, no promises.</p><div class="swipe">Swipe →</div>''',True),
+slide(2,'''<div class="num">1</div><h2>S&amp;P 500</h2><div class="rule"></div><div class="stat">~14%<small> a year</small></div>
+<p>The 500 largest companies in the U.S. Compound annual return from 2011 to 2025, with dividends reinvested.</p>'''),
+slide(3,'''<div class="num">2</div><h2>Nasdaq</h2><div class="rule"></div><div class="stat gold">~15.6%<small> a year</small></div>
+<p>The tech-heavy index: Apple, Microsoft, Nvidia, Amazon, Google. It beat the S&amp;P 500 over the same period.</p>'''),
+slide(4,f'''<div class="num">3</div><h2>$10,000 in 2011</h2><div class="rule"></div><p class="lead">Today it would be about <b>$72,000</b> in the S&amp;P 500 and <b>$87,600</b> in the Nasdaq.</p>
+<img class="chart" src="{LINE}">'''),
+slide(5,f'''<div class="num">4</div><h2>Not every year goes up</h2><div class="rule"></div><p class="lead">In 2022 the S&amp;P 500 fell <b>18%</b> and the Nasdaq <b>33%</b>. Anyone who sold in fear missed the recovery.</p>
+{LEG % (NAVY,GOLDL)}<img class="chart" src="{BARS}">'''),
+slide(6,'''<div class="num">5</div><h2>More return, more scares</h2><div class="rule"></div>
+<p>The Nasdaq earned ~1.5 points more a year, but fell almost twice as hard in its worst year. The question isn't which one earns more. It's which one you can hold without selling.</p>'''),
+slide(7,'''<div class="num">6</div><h2>Heads up: this isn't normal</h2><div class="rule"></div>
+<p>The S&amp;P 500's long-run average since 1926 is ~10% a year. These 15 years were exceptional. Plan with conservative numbers.</p>'''),
+slide(8,'''<h1 class="gold">Time in the market beats timing the market</h1><div class="rule"></div>
+<p>Same as real estate: wealth is built over years, not months. Save this post and send it to someone who's just starting to invest.</p>
+<p class="fine">Source: S&amp;P 500 total return; Nasdaq Composite price only. 2025 approximate. Past performance does not guarantee future results. Educational content, not financial advice.</p>'''),
 ]
 CSS=f"""@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Barlow+Semi+Condensed:wght@400;600&display=block');
 *{{margin:0;box-sizing:border-box}} body{{width:1080px}}
@@ -85,14 +104,16 @@ p.lead{{margin-bottom:20px}}
 .logo{{width:84px;height:84px;border-radius:50%;border:3px solid {GOLDL};color:{GOLD};font:700 36px Georgia,serif;display:flex;align-items:center;justify-content:center}}
 .h{{font:400 34px 'Barlow Semi Condensed';color:{NAVY}}} .u{{font:400 28px 'Barlow Semi Condensed';color:{GOLD}}}
 .pg{{margin-left:auto;font:400 30px 'Barlow Semi Condensed';color:#6b7280}}"""
-html=f"<!doctype html><html><head><meta charset=utf-8><style>{CSS}</style></head><body>{''.join(S)}</body></html>"
-tmp=os.path.join(tempfile.gettempdir(),"carrusel-sp500-nasdaq.html")
-with open(tmp,"w") as f: f.write(html)
-# Rendered with Node Playwright (preinstalled Chromium)
 JS=r"""const {chromium}=require('playwright');(async()=>{const [h,o]=process.argv.slice(1);
 const b=await chromium.launch();const p=await b.newPage({viewport:{width:1080,height:1350}});
 await p.goto('file://'+h,{waitUntil:'networkidle'});await p.evaluate(()=>document.fonts.ready);
 const els=await p.$$('.s');for(let i=0;i<els.length;i++)await els[i].screenshot({path:o+'/'+String(i+1).padStart(2,'0')+'.png'});
 await b.close();})();"""
-subprocess.run(["node","-e",JS,tmp,OUT],check=True)
+# Spanish slides go in this folder, English in en/. Rendered with Node Playwright (preinstalled Chromium).
+for lang,S,out in (("es",S_ES,OUT),("en",S_EN,os.path.join(OUT,"en"))):
+    os.makedirs(out,exist_ok=True)
+    html=f"<!doctype html><html lang={lang}><head><meta charset=utf-8><style>{CSS}</style></head><body>{''.join(S)}</body></html>"
+    tmp=os.path.join(tempfile.gettempdir(),f"carrusel-sp500-nasdaq-{lang}.html")
+    with open(tmp,"w") as f: f.write(html)
+    subprocess.run(["node","-e",JS,tmp,out],check=True)
 print("ok")
