@@ -27,7 +27,10 @@ SCHED = os.path.join(HERE, "schedule.csv")
 EXTRAS = os.path.join(HERE, "extras.csv")
 COLUMNS = ["post_id", "post_date", "time", "account", "series", "ref", "media",
            "channels", "images", "caption", "caption_fb", "caption_li"]
-SERIES = {"Langley Eats EN", "Langley Eats ES", "This Week EN", "This Week ES"}
+SERIES = {"Langley Eats EN", "Langley Eats ES", "This Week EN", "This Week ES",
+          # Blog photo cards (Ramon 2026-11-12): his photo + "From my blog" + link to the post.
+          # Use --folder blog-story. Same series as the Jorge cards, already in LI_SERIES.
+          "Carousel EN", "Carousel ES"}
 
 
 def web_jpeg(src, dest):
@@ -58,7 +61,10 @@ def main():
     ap.add_argument("--alt", default="", help="image description (kept for the alt-text step)")
     ap.add_argument("--channels", default="ig,fb,li,threads")
     ap.add_argument("--push", action="store_true")
+    ap.add_argument("--folder", default="local", help="assets subfolder (local | blog-story)")
     a = ap.parse_args()
+    global ASSETS
+    ASSETS = os.path.join(HERE, "assets", a.folder)
     datetime.date.fromisoformat(a.date)
     if a.series not in SERIES:
         raise SystemExit("series must be one of %s" % sorted(SERIES))
@@ -71,7 +77,7 @@ def main():
     cap = read_caption(a.caption)
     row = dict(post_id=a.id, post_date=a.date, time=a.time, account="ramonhouses",
                series=a.series, ref=a.ref, media="image", channels=a.channels,
-               images="local/" + name, caption=cap, caption_fb=cap, caption_li=cap)
+               images=a.folder + "/" + name, caption=cap, caption_fb=cap, caption_li=cap)
     for path in (EXTRAS, SCHED):
         with io.open(path, "a", encoding="utf-8", newline="") as f:
             csv.DictWriter(f, fieldnames=COLUMNS).writerow(row)
@@ -80,7 +86,7 @@ def main():
             csv.writer(f).writerow([a.id, a.alt])
     print("queued %s %s %s %s (%d KB)" % (a.id, a.date, a.time, a.series, size // 1024))
     if a.push:
-        subprocess.check_call(["git", "-C", HERE, "add", "assets/local", "schedule.csv",
+        subprocess.check_call(["git", "-C", HERE, "add", "assets/" + a.folder, "schedule.csv",
                                "extras.csv", "queue_local_guide_post.py"])
         subprocess.check_call(["git", "-C", HERE, "commit", "-m", "Queue local guide post: " + a.id])
         subprocess.check_call(["git", "-C", HERE, "push"])
