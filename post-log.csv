@@ -1627,3 +1627,8 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-11-13T11:02:27.084200-07:00,reel-en-w11a,fb:414239392030697,Reel EN,w11a,28782129768135347,ok,
 2026-11-13T11:02:27.084200-07:00,reel-en-w11a,threads,Reel EN,w11a,18350638708284525,ok,
 2026-11-13T11:02:27.084200-07:00,reel-en-w11a,yt,Reel EN,w11a,8Ni2_9V71ps,ok,
+2026-11-13T12:02:29.139499-07:00,thisweek-2026-11-13-en,li:person,This Week EN,"Things to do near Langley, Nov 13-22",,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-13T12:02:29.139499-07:00,rq-28-en,ig:ramonhouses,RE Quote EN,Card 28,18102471944429228,ok,
+2026-11-13T12:02:29.139499-07:00,rq-28-en,fb:414239392030697,RE Quote EN,Card 28,414239392030697_122233599386048227,ok,
+2026-11-13T12:02:29.139499-07:00,rq-28-en,threads,RE Quote EN,Card 28,18120203039021168,ok,
+2026-11-13T12:02:29.139499-07:00,rq-28-en,li:person,RE Quote EN,Card 28,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
