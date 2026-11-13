@@ -9031,6 +9031,10 @@
         "threads": {
           "id": "18483801262118407",
           "at": "2026-11-13T14:02:33.167779-07:00"
+        },
+        "li:person": {
+          "id": "manual-stop-2026-11-13 (LI returned error but posted; Ramon deleted a duplicate)",
+          "at": "2026-11-13T15:55:00-07:00"
         }
       },
       "at": "2026-11-13T14:02:33.167779-07:00",
