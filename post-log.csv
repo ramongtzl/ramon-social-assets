@@ -1644,3 +1644,14 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-11-13T15:29:37.892497-07:00,thisweek-2026-11-13-en,li:person,This Week EN,"Things to do near Langley, Nov 13-22",,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
 2026-11-13T15:29:37.892497-07:00,rq-28-en,li:person,RE Quote EN,Card 28,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
 2026-11-13T15:29:37.892497-07:00,oh-2026-11-14-461-carlsen-es,li:person,Open House,461 Carlsen Place R3149832,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-13T16:02:38.801836-07:00,thisweek-2026-11-13-en,li:person,This Week EN,"Things to do near Langley, Nov 13-22",,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-13T16:02:38.801836-07:00,rq-28-en,li:person,RE Quote EN,Card 28,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-13T16:02:38.801836-07:00,life-two-storey,ig:ramonhouses,Lifestyle,two-storey,18290783533290220,ok,
+2026-11-13T16:02:38.801836-07:00,life-two-storey,fb:414239392030697,Lifestyle,two-storey,1489846720878416,ok,
+2026-11-13T16:02:38.801836-07:00,life-two-storey,threads,Lifestyle,two-storey,18132894562855179,ok,
+2026-11-13T16:02:38.801836-07:00,life-two-storey,yt,Lifestyle,two-storey,B8b7nxBR00Y,ok,
+2026-11-13T16:02:38.801836-07:00,life-two-storey-li,li:person,Lifestyle,two-storey,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-13T16:02:38.801836-07:00,pr-2026-11-13-461-carlsen-849k-repost-en,ig:ramonhouses,Price Reduced,461 Carlsen Place R3149832,18418717513084605,ok,
+2026-11-13T16:02:38.801836-07:00,pr-2026-11-13-461-carlsen-849k-repost-en,fb:414239392030697,Price Reduced,461 Carlsen Place R3149832,414239392030697_122233611416048227,ok,
+2026-11-13T16:02:38.801836-07:00,pr-2026-11-13-461-carlsen-849k-repost-en,threads,Price Reduced,461 Carlsen Place R3149832,18013520637002452,ok,
+2026-11-13T16:02:38.801836-07:00,pr-2026-11-13-461-carlsen-849k-repost-en,li:person,Price Reduced,461 Carlsen Place R3149832,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
