@@ -1632,3 +1632,9 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-11-13T12:02:29.139499-07:00,rq-28-en,fb:414239392030697,RE Quote EN,Card 28,414239392030697_122233599386048227,ok,
 2026-11-13T12:02:29.139499-07:00,rq-28-en,threads,RE Quote EN,Card 28,18120203039021168,ok,
 2026-11-13T12:02:29.139499-07:00,rq-28-en,li:person,RE Quote EN,Card 28,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-13T14:02:33.167779-07:00,thisweek-2026-11-13-en,li:person,This Week EN,"Things to do near Langley, Nov 13-22",,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-13T14:02:33.167779-07:00,rq-28-en,li:person,RE Quote EN,Card 28,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-13T14:02:33.167779-07:00,oh-2026-11-14-461-carlsen-es,ig:ramonhouses,Open House,461 Carlsen Place R3149832,18116553452590990,ok,
+2026-11-13T14:02:33.167779-07:00,oh-2026-11-14-461-carlsen-es,fb:414239392030697,Open House,461 Carlsen Place R3149832,414239392030697_122233605644048227,ok,
+2026-11-13T14:02:33.167779-07:00,oh-2026-11-14-461-carlsen-es,threads,Open House,461 Carlsen Place R3149832,18483801262118407,ok,
+2026-11-13T14:02:33.167779-07:00,oh-2026-11-14-461-carlsen-es,li:person,Open House,461 Carlsen Place R3149832,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
