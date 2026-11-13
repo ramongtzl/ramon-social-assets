@@ -1618,3 +1618,7 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-11-12T19:02:36.648740-07:00,r2b-day-074,fb:543998318793132,Round 2b,Day 074,543998318793132_122186986316716289,ok,
 2026-11-13T08:13:35.437565-07:00,r2-day-075,ig:growthwealth,Round 2,Day 075,18104310611418296,ok,
 2026-11-13T08:13:35.437565-07:00,r2-day-075,fb:543998318793132,Round 2,Day 075,543998318793132_122187057452716289,ok,
+2026-11-13T10:02:25.717590-07:00,thisweek-2026-11-13-en,ig:ramonhouses,This Week EN,"Things to do near Langley, Nov 13-22",18222329431354130,ok,
+2026-11-13T10:02:25.717590-07:00,thisweek-2026-11-13-en,fb:414239392030697,This Week EN,"Things to do near Langley, Nov 13-22",414239392030697_122233594046048227,ok,
+2026-11-13T10:02:25.717590-07:00,thisweek-2026-11-13-en,threads,This Week EN,"Things to do near Langley, Nov 13-22",17998593294045141,ok,
+2026-11-13T10:02:25.717590-07:00,thisweek-2026-11-13-en,li:person,This Week EN,"Things to do near Langley, Nov 13-22",,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
