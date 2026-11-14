@@ -1712,3 +1712,9 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-11-14T10:02:24.591915-07:00,re-en-day-21,fb:414239392030697,RE Single EN,Day 21,414239392030697_122233672904048227,ok,
 2026-11-14T10:02:24.591915-07:00,re-en-day-21,threads,RE Single EN,Day 21,18133207999795479,ok,
 2026-11-14T10:02:24.591915-07:00,re-en-day-21,li:person,RE Single EN,Day 21,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-14T11:02:25.507064-07:00,bs-09-p3-es,li:person,Blog Series ES,Blog 09 Part 3,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-14T11:02:25.507064-07:00,re-en-day-21,li:person,RE Single EN,Day 21,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-14T11:02:25.507064-07:00,reel-es-w11a,ig:ramonhouses,Reel ES,w11a,18009584138989349,ok,
+2026-11-14T11:02:25.507064-07:00,reel-es-w11a,fb:414239392030697,Reel ES,w11a,2180069442944291,ok,
+2026-11-14T11:02:25.507064-07:00,reel-es-w11a,threads,Reel ES,w11a,18152867821550338,ok,
+2026-11-14T11:02:25.507064-07:00,reel-es-w11a,yt,Reel ES,w11a,_AYdGwaQi04,ok,
