@@ -1700,3 +1700,5 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-11-14T04:02:24.705015-07:00,pr-2026-11-13-461-carlsen-849k-repost-es,li:person,Price Reduced,461 Carlsen Place R3149832,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
 2026-11-14T05:02:25.843203-07:00,pr-2026-11-13-461-carlsen-849k-repost-es,li:person,Price Reduced,461 Carlsen Place R3149832,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
 2026-11-14T06:02:24.596488-07:00,pr-2026-11-13-461-carlsen-849k-repost-es,li:person,Price Reduced,461 Carlsen Place R3149832,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-14T07:02:26.512607-07:00,r2-day-076,ig:growthwealth,Round 2,Day 076,18187398784425779,ok,
+2026-11-14T07:02:26.512607-07:00,r2-day-076,fb:543998318793132,Round 2,Day 076,543998318793132_122187154052716289,ok,
