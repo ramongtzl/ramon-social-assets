@@ -1720,3 +1720,9 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-11-14T11:02:25.507064-07:00,reel-es-w11a,yt,Reel ES,w11a,_AYdGwaQi04,ok,
 2026-11-14T12:02:23.374241-07:00,bs-09-p3-es,li:person,Blog Series ES,Blog 09 Part 3,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
 2026-11-14T12:02:23.374241-07:00,re-en-day-21,li:person,RE Single EN,Day 21,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-14T13:02:28.477164-07:00,bs-09-p3-es,li:person,Blog Series ES,Blog 09 Part 3,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-14T13:02:28.477164-07:00,re-en-day-21,li:person,RE Single EN,Day 21,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-14T13:02:28.477164-07:00,blog67-son-for-1-photo-en,ig:ramonhouses,Carousel EN,blog 67 sell-house-to-son-for-1,18125299160515091,ok,
+2026-11-14T13:02:28.477164-07:00,blog67-son-for-1-photo-en,fb:414239392030697,Carousel EN,blog 67 sell-house-to-son-for-1,414239392030697_122233683824048227,ok,
+2026-11-14T13:02:28.477164-07:00,blog67-son-for-1-photo-en,threads,Carousel EN,blog 67 sell-house-to-son-for-1,17912495493563804,ok,
+2026-11-14T13:02:28.477164-07:00,blog67-son-for-1-photo-en,li:person,Carousel EN,blog 67 sell-house-to-son-for-1,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
