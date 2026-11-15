@@ -1805,3 +1805,8 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-11-15T10:02:25.348098-07:00,re-es-day-21,fb:414239392030697,RE Single ES,Day 21,414239392030697_122233755806048227,ok,
 2026-11-15T10:02:25.348098-07:00,re-es-day-21,threads,RE Single ES,Day 21,18022112894951133,ok,
 2026-11-15T10:02:25.348098-07:00,re-es-day-21,li:person,RE Single ES,Day 21,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-15T11:02:24.772095-07:00,re-es-day-21,li:person,RE Single ES,Day 21,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-15T11:02:24.772095-07:00,car-en-w11b,ig:ramonhouses,Carousel EN,w11b,18118536584595554,ok,
+2026-11-15T11:02:24.772095-07:00,car-en-w11b,fb:414239392030697,Carousel EN,w11b,414239392030697_122233758848048227,ok,
+2026-11-15T11:02:24.772095-07:00,car-en-w11b,threads,Carousel EN,w11b,18655566469057914,ok,
+2026-11-15T11:02:24.772095-07:00,car-en-w11b,li:person,Carousel EN,w11b,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
