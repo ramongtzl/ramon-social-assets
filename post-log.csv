@@ -1850,3 +1850,7 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-11-15T19:02:25.705805-07:00,cs-2026-11-15-th01-fraser-es,li:person,Coming Soon,1 - 20723 Fraser Highway R3183790,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
 2026-11-15T19:02:25.705805-07:00,r2b-day-077,ig:growthwealth,Round 2b,Day 077,17944430736385519,ok,
 2026-11-15T19:02:25.705805-07:00,r2b-day-077,fb:543998318793132,Round 2b,Day 077,543998318793132_122187324224716289,ok,
+2026-11-15T20:02:33.139477-07:00,re-es-day-21,li:person,RE Single ES,Day 21,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-15T20:02:33.139477-07:00,car-en-w11b,li:person,Carousel EN,w11b,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-15T20:02:33.139477-07:00,thisweek-2026-11-15-es,li:person,This Week ES,"Qué hacer cerca de Langley, 13-22 nov",,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-15T20:02:33.139477-07:00,cs-2026-11-15-th01-fraser-es,li:person,Coming Soon,1 - 20723 Fraser Highway R3183790,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
