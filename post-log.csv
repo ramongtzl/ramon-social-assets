@@ -1881,3 +1881,8 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-11-16T10:02:58.917690-07:00,re-en-day-22,threads,RE Single EN,Day 22,18093057629245071,ok,
 2026-11-16T10:02:58.917690-07:00,re-en-day-22,li:person,RE Single EN,Day 22,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
 2026-11-16T11:02:28.720445-07:00,re-en-day-22,li:person,RE Single EN,Day 22,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-16T12:02:24.995346-07:00,re-en-day-22,li:person,RE Single EN,Day 22,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-16T12:02:24.995346-07:00,rq-29-es,ig:ramonhouses,RE Quote ES,Card 29,18120010331052387,ok,
+2026-11-16T12:02:24.995346-07:00,rq-29-es,fb:414239392030697,RE Quote ES,Card 29,414239392030697_122233839620048227,ok,
+2026-11-16T12:02:24.995346-07:00,rq-29-es,threads,RE Quote ES,Card 29,18084089615341503,ok,
+2026-11-16T12:02:24.995346-07:00,rq-29-es,li:person,RE Quote ES,Card 29,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
