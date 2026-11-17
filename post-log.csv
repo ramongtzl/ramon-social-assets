@@ -1911,3 +1911,8 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-11-16T18:02:56.525041-07:00,re-en-day-22,li:person,RE Single EN,Day 22,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
 2026-11-16T18:02:56.525041-07:00,rq-29-es,li:person,RE Quote ES,Card 29,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
 2026-11-16T18:02:56.525041-07:00,life-sea-view-balcony-li,li:person,Lifestyle,sea-view-balcony,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-16T19:02:24.924145-07:00,re-en-day-22,li:person,RE Single EN,Day 22,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-16T19:02:24.924145-07:00,rq-29-es,li:person,RE Quote ES,Card 29,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-16T19:02:24.924145-07:00,life-sea-view-balcony-li,li:person,Lifestyle,sea-view-balcony,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-16T19:02:24.924145-07:00,r2b-day-078,ig:growthwealth,Round 2b,Day 078,17919117276536457,ok,
+2026-11-16T19:02:24.924145-07:00,r2b-day-078,fb:543998318793132,Round 2b,Day 078,543998318793132_122187436016716289,ok,
