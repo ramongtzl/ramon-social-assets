@@ -1933,3 +1933,7 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-11-16T23:02:26.992154-07:00,life-sea-view-balcony-li,li:person,Lifestyle,sea-view-balcony,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
 2026-11-17T07:02:31.376283-07:00,r2-day-079,ig:growthwealth,Round 2,Day 079,18019939154957372,ok,
 2026-11-17T07:02:31.376283-07:00,r2-day-079,fb:543998318793132,Round 2,Day 079,543998318793132_122187488600716289,ok,
+2026-11-17T09:02:40.134772-07:00,bs-10-p1-es,ig:ramonhouses,Blog Series ES,Blog 10 Part 1,17982750132070193,ok,
+2026-11-17T09:02:40.134772-07:00,bs-10-p1-es,fb:414239392030697,Blog Series ES,Blog 10 Part 1,414239392030697_122233910960048227,ok,
+2026-11-17T09:02:40.134772-07:00,bs-10-p1-es,threads,Blog Series ES,Blog 10 Part 1,18194585503410098,ok,
+2026-11-17T09:02:40.134772-07:00,bs-10-p1-es,li:person,Blog Series ES,Blog 10 Part 1,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
