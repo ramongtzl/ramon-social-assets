@@ -1901,3 +1901,10 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-11-16T16:02:23.307376-07:00,life-sea-view-balcony,threads,Lifestyle,sea-view-balcony,18110621204360546,ok,
 2026-11-16T16:02:23.307376-07:00,life-sea-view-balcony,yt,Lifestyle,sea-view-balcony,risJiQ3IuXY,ok,
 2026-11-16T16:02:23.307376-07:00,life-sea-view-balcony-li,li:person,Lifestyle,sea-view-balcony,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-16T17:02:24.975797-07:00,re-en-day-22,li:person,RE Single EN,Day 22,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-16T17:02:24.975797-07:00,rq-29-es,li:person,RE Quote ES,Card 29,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-16T17:02:24.975797-07:00,life-sea-view-balcony-li,li:person,Lifestyle,sea-view-balcony,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-16T17:02:24.975797-07:00,reel-en-w11b,ig:ramonhouses,Reel EN,w11b,18116092661156293,ok,
+2026-11-16T17:02:24.975797-07:00,reel-en-w11b,fb:414239392030697,Reel EN,w11b,1477282257667000,ok,
+2026-11-16T17:02:24.975797-07:00,reel-en-w11b,threads,Reel EN,w11b,17958131010270584,ok,
+2026-11-16T17:02:24.975797-07:00,reel-en-w11b,yt,Reel EN,w11b,aEjRrlPGsEg,ok,
