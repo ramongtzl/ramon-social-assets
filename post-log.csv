@@ -1945,3 +1945,8 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-11-17T11:02:27.783255-07:00,car-en-w12a,li:person,Carousel EN,w12a,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
 2026-11-17T12:02:25.193912-07:00,bs-10-p1-es,li:person,Blog Series ES,Blog 10 Part 1,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
 2026-11-17T12:02:25.193912-07:00,car-en-w12a,li:person,Carousel EN,w12a,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-17T13:02:26.224180-07:00,bs-10-p1-es,li:person,Blog Series ES,Blog 10 Part 1,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-17T13:02:26.224180-07:00,car-en-w12a,li:person,Carousel EN,w12a,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-17T13:02:26.224180-07:00,blog67-son-for-1-photo-es,ig:ramonhouses,Carousel ES,blog 67 sell-house-to-son-for-1,17957051505293375,ok,
+2026-11-17T13:02:26.224180-07:00,blog67-son-for-1-photo-es,fb:414239392030697,Carousel ES,blog 67 sell-house-to-son-for-1,414239392030697_122233925438048227,ok,
+2026-11-17T13:02:26.224180-07:00,blog67-son-for-1-photo-es,threads,Carousel ES,blog 67 sell-house-to-son-for-1,18079333619751035,ok,
