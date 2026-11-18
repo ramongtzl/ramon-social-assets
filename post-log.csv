@@ -1996,3 +1996,6 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-11-17T23:39:47.986128-07:00,bs-10-p1-en,li:person,Blog Series EN,Blog 10 Part 1,urn:li:share:7528708556129423360,ok,
 2026-11-18T07:02:25.579448-07:00,r2-day-080,ig:growthwealth,Round 2,Day 080,18115971470151518,ok,
 2026-11-18T07:02:25.579448-07:00,r2-day-080,fb:543998318793132,Round 2,Day 080,543998318793132_122187602606716289,ok,
+2026-11-18T11:02:36.704999-07:00,car-es-w12a,ig:ramonhouses,Carousel ES,w12a,17920992771462524,ok,
+2026-11-18T11:02:36.704999-07:00,car-es-w12a,fb:414239392030697,Carousel ES,w12a,414239392030697_122234010896048227,ok,
+2026-11-18T11:02:36.704999-07:00,car-es-w12a,threads,Carousel ES,w12a,,error,"HTTP 400: {""error"":{""message"":""Error validating access token: Session has expired on Wednesday, 18-Nov-26 09:00:12 PST. The current time is Wednesday, 18-Nov-26 10:03:55 PST."",""code"":190,""type"":""OAuthException"",""error_subcode"":0,""fbtrace_id"":""AuqEEi4YKe1WaD5rk8n00MO""}}"
