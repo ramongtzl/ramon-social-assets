@@ -1976,3 +1976,6 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-11-17T19:02:24.317820-07:00,bs-10-p1-en,li:person,Blog Series EN,Blog 10 Part 1,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
 2026-11-17T19:02:24.317820-07:00,r2b-day-079,ig:growthwealth,Round 2b,Day 079,17925328794449387,ok,
 2026-11-17T19:02:24.317820-07:00,r2b-day-079,fb:543998318793132,Round 2b,Day 079,543998318793132_122187536798716289,ok,
+2026-11-17T20:02:25.699914-07:00,bs-10-p1-es,li:person,Blog Series ES,Blog 10 Part 1,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-17T20:02:25.699914-07:00,car-en-w12a,li:person,Carousel EN,w12a,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
+2026-11-17T20:02:25.699914-07:00,bs-10-p1-en,li:person,Blog Series EN,Blog 10 Part 1,,error,"HTTP 401: {""status"":401,""serviceErrorCode"":65602,""code"":""EXPIRED_ACCESS_TOKEN"",""message"":""The token used in the request has expired""}"
