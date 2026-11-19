@@ -2062,3 +2062,7 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-11-18T23:02:23.810145-07:00,life-vancouver-lions-gate,threads,Lifestyle,vancouver-lions-gate,,error,"HTTP 400: {""error"":{""message"":""Error validating access token: Session has expired on Wednesday, 18-Nov-26 09:00:12 PST. The current time is Wednesday, 18-Nov-26 22:02:24 PST."",""code"":190,""type"":""OAuthException"",""error_subcode"":0,""fbtrace_id"":""AaEROyAg1I-o4LxJtijmn4w""}}"
 2026-11-19T07:02:26.014786-07:00,r2-day-081,ig:growthwealth,Round 2,Day 081,17869094169679832,ok,
 2026-11-19T07:02:26.014786-07:00,r2-day-081,fb:543998318793132,Round 2,Day 081,543998318793132_122187711026716289,ok,
+2026-11-19T09:02:26.003473-07:00,bs-10-p2-es,ig:ramonhouses,Blog Series ES,Blog 10 Part 2,18130461772850578,ok,
+2026-11-19T09:02:26.003473-07:00,bs-10-p2-es,fb:414239392030697,Blog Series ES,Blog 10 Part 2,414239392030697_122234093168048227,ok,
+2026-11-19T09:02:26.003473-07:00,bs-10-p2-es,li:person,Blog Series ES,Blog 10 Part 2,urn:li:share:7529212570671624194,ok,
+2026-11-19T09:02:26.003473-07:00,bs-10-p2-es,threads,Blog Series ES,Blog 10 Part 2,,error,"HTTP 400: {""error"":{""message"":""Error validating access token: Session has expired on Wednesday, 18-Nov-26 09:00:12 PST. The current time is Thursday, 19-Nov-26 08:02:43 PST."",""code"":190,""type"":""OAuthException"",""error_subcode"":0,""fbtrace_id"":""AnVuv5IhGbcyZMQvqVoyVAM""}}"
