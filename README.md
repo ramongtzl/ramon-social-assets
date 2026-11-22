@@ -1,6 +1,6 @@
 # Ramon's Social Publishing Engine
 
-**[AI Mastermind](https://growth-and-wealth-ai.ca/?src=github)** (free, Level 1) · **[Superstars Multiplier](https://growth-and-wealth-superstars.ca/?src=github)** · **[Level 2 · AI Platform](https://growth-and-wealth-superstars.ca/automation.html?src=github)** · **[Free Claude skills for agents](https://github.com/ramongtzl/superstars-real-estate-skills)** · [Español](#en-español)
+**[AI Mastermind](https://growth-and-wealth-ai.ca/?src=github)** (free, Level 1) · **[Superstars Multiplier](https://growth-and-wealth-superstars.ca/?src=github)** · **[Level 2 · AI Platform](https://growth-and-wealth-superstars.ca/automation.html?src=github)** · **[Free Claude skills for agents](https://github.com/ramongtzl-superrockstars/superstars-real-estate-skills)** · [Español](#en-español)
 
 This is the engine behind **Ramon Gutierrez's** social media. It runs on autopilot: GitHub Actions publish each scheduled post, and GitHub Pages hosts the images and reels that the platforms pull in. Every morning it also collects how each post performed.
 
