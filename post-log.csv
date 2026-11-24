@@ -2496,3 +2496,7 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-11-23T20:02:24.408940-07:00,rq-32-en,threads,RE Quote EN,Card 32,,error,"HTTP 400: {""error"":{""message"":""Error validating access token: Session has expired on Wednesday, 18-Nov-26 09:00:12 PST. The current time is Monday, 23-Nov-26 19:02:25 PST."",""code"":190,""type"":""OAuthException"",""error_subcode"":0,""fbtrace_id"":""AwjLB5uW9HsMtIGArGnDuBO""}}"
 2026-11-23T20:02:24.408940-07:00,life-langley-pond,threads,Lifestyle,langley-pond,,error,"HTTP 400: {""error"":{""message"":""Error validating access token: Session has expired on Wednesday, 18-Nov-26 09:00:12 PST. The current time is Monday, 23-Nov-26 19:02:25 PST."",""code"":190,""type"":""OAuthException"",""error_subcode"":0,""fbtrace_id"":""AIKAYVNSHBxiwW-QgQWqhz9""}}"
 2026-11-23T20:02:24.408940-07:00,reel-en-w12b,threads,Reel EN,w12b,,error,"HTTP 400: {""error"":{""message"":""Error validating access token: Session has expired on Wednesday, 18-Nov-26 09:00:12 PST. The current time is Monday, 23-Nov-26 19:02:25 PST."",""code"":190,""type"":""OAuthException"",""error_subcode"":0,""fbtrace_id"":""A6tDfR3hsEuWVrdQo26h-A4""}}"
+2026-11-23T20:57:28.250232-07:00,re-en-day-24,threads,RE Single EN,Day 24,18117813710057568,ok,
+2026-11-23T20:57:28.250232-07:00,rq-32-en,threads,RE Quote EN,Card 32,18254715736309457,ok,
+2026-11-23T20:57:28.250232-07:00,life-langley-pond,threads,Lifestyle,langley-pond,17912961411584569,ok,
+2026-11-23T20:57:28.250232-07:00,reel-en-w12b,threads,Reel EN,w12b,18102256847536541,ok,
