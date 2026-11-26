@@ -2542,3 +2542,7 @@ run_at_pacific,post_id,account,series,ref,media_id,status,detail
 2026-11-26T10:02:25.242991-07:00,re-es-day-24,fb:414239392030697,RE Single ES,Day 24,414239392030697_122234791778048227,ok,
 2026-11-26T10:02:25.242991-07:00,re-es-day-24,li:person,RE Single ES,Day 24,urn:li:share:7531764387758399488,ok,
 2026-11-26T10:02:25.242991-07:00,re-es-day-24,threads,RE Single ES,Day 24,18101101880553913,ok,
+2026-11-26T14:02:23.571031-07:00,bs-11-p2-en,ig:ramonhouses,Blog Series EN,Blog 11 Part 2,18107155727633728,ok,
+2026-11-26T14:02:23.571031-07:00,bs-11-p2-en,fb:414239392030697,Blog Series EN,Blog 11 Part 2,414239392030697_122234803880048227,ok,
+2026-11-26T14:02:23.571031-07:00,bs-11-p2-en,li:person,Blog Series EN,Blog 11 Part 2,urn:li:share:7531824820502835201,ok,
+2026-11-26T14:02:23.571031-07:00,bs-11-p2-en,threads,Blog Series EN,Blog 11 Part 2,18117954377151196,ok,
